@@ -1,56 +1,58 @@
-
 <mat-stepper #stepper>
-    <mat-step>
-      <div>
-        <h1>Mention the Roles Present in the company</h1>
-        <mat-form-field>
-            <mat-label>Enter Roles</mat-label>
-            <br>
-            <mat-chip-grid #chipGrid aria-label="Enter Roles">
-              @for (role of roles; track role) {
-                <mat-chip-row
-                  (removed)="remove(role)"
-                  [editable]="true"
-                  (edited)="edit(role, $event)"
-                  [aria-description]="'press enter to edit ' + role.name">
-                  {{role.name}}
-                  <button matChipRemove [attr.aria-label]="'remove ' + role.name">
-                    <mat-icon>cancel</mat-icon>
-                  </button>
-                </mat-chip-row>
-              }
-              <input placeholder="New Role..."
-                     [matChipInputFor]="chipGrid"
-                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                     [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="add($event)"/>
-            </mat-chip-grid>
-          </mat-form-field>
-          <br>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-        <h1>Assign Functions to the Mentioned Roles</h1>
-        <mat-form-field>
-          <mat-label>Select</mat-label>
-          <mat-select>
-            @for (role of roles; track role) {
-              <mat-option [value]="role.name">{{role.name}}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      <div>
+  <mat-step>
+    <div>
+      <h1>Mention the Roles Present in the company</h1>
+      <mat-form-field>
+        <mat-label>Enter Roles</mat-label>
         <br>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" (click)="stepper.reset()">(Finish) Reset</button>
-      </div>
-    </mat-step> 
-  </mat-stepper>
-  
+        <mat-chip-grid #chipGrid aria-label="Enter Roles">
+          @for (role of roles; track role) {
+          <mat-chip-row (removed)="remove(role)" [editable]="true" (edited)="edit(role, $event)"
+            [aria-description]="'press enter to edit ' + role.name">
+            {{role.name}}
+            <button matChipRemove [attr.aria-label]="'remove ' + role.name">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+          <input placeholder="New Role..." [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)" />
+        </mat-chip-grid>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <h1>Assign Functions to the Mentioned Roles</h1>
+    <div style="display: flex;">
+      <mat-form-field>
+        <mat-label>Select</mat-label>
+        <mat-select>
+          @for (role of roles; track role) {
+            <mat-option [value]="role.name">{{role.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-chip-listbox aria-label="Fish selection" multiple>
+        <mat-chip-option>CREATE</mat-chip-option>
+        <mat-chip-option>READ</mat-chip-option>
+        <mat-chip-option>UPDATE</mat-chip-option>
+        <mat-chip-option>DELETE</mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+    
+    <div>
+      <br>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" (click)="stepper.reset()">(Finish) Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
