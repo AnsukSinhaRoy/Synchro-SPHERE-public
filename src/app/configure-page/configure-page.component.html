@@ -1,0 +1,20 @@
+<mat-tab-group [selectedIndex]="selectedIndex">
+    @for (label of tabLabels; track label; let idx=$index) {
+      @if (tabVisibility[idx]) {
+        <mat-tab label="{{ label }}">
+            <ng-template matTabContent>
+                @if (label === 'Customer Relationship Management') {
+                  <app-customer-relationship-management-config></app-customer-relationship-management-config>
+                } @else if (label === 'Lead Management') {
+                  <app-lead-management-config></app-lead-management-config>
+                } @else if (label === 'Travel management') {
+                  <app-travel-management-config></app-travel-management-config>
+                }
+              </ng-template>
+        </mat-tab>
+      } @else {
+        <mat-tab label="{{ label }}" disabled> Content for {{ label }} </mat-tab>
+      }
+    }
+  </mat-tab-group>
+  
