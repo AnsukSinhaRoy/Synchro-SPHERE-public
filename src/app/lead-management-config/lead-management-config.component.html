@@ -10,7 +10,7 @@
           <mat-chip-row (removed)="remove(role)" [editable]="true" (edited)="edit(role, $event)"
             [aria-description]="'press enter to edit ' + role.name">
             {{role.name}}
-            <button matChipRemove [attr.aria-label]="'remove ' + role.name">
+            <button matChipRemove [attr.aria-label]="'remove' + role.name">
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip-row>
@@ -43,7 +43,7 @@
       </mat-chip-listbox>
       <button mat-raised-button color="warn" (click)="confirm()">Confirm</button>
     </div>
-    <div style="width: 500px; margin: 20px;">
+    <div style="width: 450px; margin-top: 100px;">
       <mat-table [dataSource]="permissions" class="mat-elevation-z8">
       <!-- Role Column -->
       <ng-container matColumnDef="role">
@@ -79,10 +79,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </mat-table>
     </div>
-    
-    
-    
-    
+
     <div>
       <br>
       <button mat-button matStepperPrevious>Back</button>
@@ -92,7 +89,7 @@
   <mat-step>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-raised-button color="primary" (click)="stepper.reset()">(Finish) Reset</button>
+      <button mat-raised-button color="primary" (click)="reset()" (click)="stepper.reset()">(Finish) Reset</button>
     </div>
   </mat-step>
 </mat-stepper>

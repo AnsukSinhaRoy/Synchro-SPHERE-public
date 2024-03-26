@@ -40,6 +40,10 @@ export class LeadManagementConfigComponent {
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private changeDetectorRefs: ChangeDetectorRef) {}
+  reset()
+  {
+    this.permissions=[];
+  }
  //ASSIGN ROLES
  addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -56,14 +60,27 @@ export class LeadManagementConfigComponent {
 
   remove(roles: Roles): void {
     const index = this.roles.indexOf(roles);
-
+  
     if (index >= 0) {
+      // Remove the role from the roles array
       this.roles.splice(index, 1);
-
-      this.announcer.announce(`Removed ${roles}`);
+  
+      // Find the index of the role in the permissions array
+      const permissionsIndex = this.permissions.findIndex(permission => permission.role === roles.name);
+  
+      if (permissionsIndex >= 0) {
+        // If the role exists in the permissions array, remove it
+        this.permissions.splice(permissionsIndex, 1);
+      }
+  
+      this.announcer.announce(`Removed ${roles.name}`);
+  
+      // Detect changes and refresh table
+      this.changeDetectorRefs.detectChanges();
+      this.table.renderRows();
     }
-
   }
+  
   edit(roles: Roles, event: MatChipEditedEvent) {
     const value = event.value.trim();
     if (!value) {
@@ -84,8 +101,9 @@ export class LeadManagementConfigComponent {
 
   confirm() {
     // Find the index of the role in the permissions array
-    if(this.selectedRole){const index = this.permissions.findIndex(permission => permission.role === this.selectedRole);
-
+    if(this.selectedRole){
+      const index = this.permissions.findIndex(permission => permission.role === this.selectedRole);
+  
       if (index >= 0) {
         // If the role already exists in the permissions array, update its functions
         this.permissions[index].functions = this.selectedFunctions;
@@ -99,8 +117,10 @@ export class LeadManagementConfigComponent {
   
       // Detect changes and refresh table
       this.changeDetectorRefs.detectChanges();
-      this.table.renderRows();}
-    else {console.log("NO ROLE IS SELECTED")}
+      this.table.renderRows();
+    } else {
+      console.log("NO ROLE IS SELECTED");
+    }
   }
   set selectedRole(value: string) {
     this._selectedRole = value;
