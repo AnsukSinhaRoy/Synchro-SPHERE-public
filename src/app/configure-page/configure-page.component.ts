@@ -13,7 +13,7 @@ import { TravelManagementConfigComponent } from '../travel-management-config/tra
 })
 export class ConfigurePageComponent {
   tabLabels = ['Customer Relationship Management', 'Lead Management', 'Travel management'];
-  tabVisibility = [false, true, true];
+  tabVisibility = [true, true, true];
   selectedIndex = this.tabVisibility.indexOf(true);
   selectedTabLabel: string | undefined; // Declare selectedTabLabel here
 
