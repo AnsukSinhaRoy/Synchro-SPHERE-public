@@ -21,11 +21,11 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/favico.png",
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -86,11 +86,11 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              "src/favicon.ico",
+              "src/favico.png",
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -98,5 +98,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "21e19481-8c0a-4344-a74f-d62263700f2b"
   }
 }
