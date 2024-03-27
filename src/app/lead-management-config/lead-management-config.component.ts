@@ -1,20 +1,26 @@
 import {MatStepperModule} from '@angular/material/stepper';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl, FormArray, AbstractControl} from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatTable, MatTableModule} from '@angular/material/table';
+import {MatTable, MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import {Component, ViewChild, inject} from '@angular/core';
+import {Component, ViewChild, inject, ChangeDetectorRef} from '@angular/core';
 import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
-import { ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 export interface Roles {
   name: string;
+}
+export interface Employee {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
 }
 
 @Component({
@@ -32,14 +38,54 @@ export interface Roles {
      MatButtonModule, 
      MatSelectModule,
      MatTableModule,
+     CommonModule,
      MatButtonToggleModule],
   templateUrl: './lead-management-config.component.html',
   styleUrl: './lead-management-config.component.css'
 })
 export class LeadManagementConfigComponent {
   @ViewChild(MatTable) table!: MatTable<any>;
+  VOForm!: FormGroup;
+  employees: Employee[] = [
+    {id: 1, name: 'John Doe', email: 'john.doe@example.com', role: 'Manager'},
+  ];
+  isLoading = true;
+  dataSource = new MatTableDataSource<any>();
 
-  constructor(private changeDetectorRefs: ChangeDetectorRef) {}
+  constructor(private changeDetectorRefs: ChangeDetectorRef, private _formBuilder: FormBuilder, private fb: FormBuilder)
+   {
+    this.VOForm = this._formBuilder.group({
+      VORows: this._formBuilder.array([])
+    });  
+  }
+  ngOnInit(): void {
+    this.VOForm = this._formBuilder.group({
+      VORows: this._formBuilder.array([])
+    });
+  
+    this.employees = [
+      {id: 1, name: 'John Doe', email: 'john.doe@example.com', role: 'Manager'},
+    ];
+  
+    this.VOForm = this.fb.group({
+      VORows: this.fb.array(this.employees.map(val => this.fb.group({
+        id: new FormControl(val.id),
+        name: new FormControl(val.name),
+        email: new FormControl(val.email),
+        role: new FormControl(val.role),
+        action: new FormControl('existingRecord'),
+        isEditable: new FormControl(true),
+        isNewRow: new FormControl(false),
+      })))
+    });
+    this.isLoading = false;
+    this.dataSource = new MatTableDataSource((this.VOForm.get('VORows') as FormArray).controls);
+  
+    const filterPredicate = this.dataSource.filterPredicate;
+    this.dataSource.filterPredicate = (data: AbstractControl, filter) => {
+      return filterPredicate.call(this.dataSource, data.value, filter);
+    }
+  }
  //ASSIGN ROLES
  addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -50,20 +96,36 @@ export class LeadManagementConfigComponent {
     const value = (event.value || '').trim();
     if (value) {
       this.roles.push({name: value});
+      this.permissions.push({role: value, functions: ['NO', 'NO', 'NO', 'NO']});
     }
+    this.changeDetectorRefs.detectChanges();
+  this.table.renderRows();
     event.chipInput!.clear();
   }
 
   remove(roles: Roles): void {
     const index = this.roles.indexOf(roles);
-
+  
     if (index >= 0) {
+      // Remove the role from the roles array
       this.roles.splice(index, 1);
-
-      this.announcer.announce(`Removed ${roles}`);
+  
+      // Find the index of the role in the permissions array
+      const permissionsIndex = this.permissions.findIndex(permission => permission.role === roles.name);
+  
+      if (permissionsIndex >= 0) {
+        // If the role exists in the permissions array, remove it
+        this.permissions.splice(permissionsIndex, 1);
+      }
+  
+      this.announcer.announce(`Removed ${roles.name}`);
+  
+      // Detect changes and refresh table
+      this.changeDetectorRefs.detectChanges();
+      this.table.renderRows();
     }
-
   }
+  
   edit(roles: Roles, event: MatChipEditedEvent) {
     const value = event.value.trim();
     if (!value) {
@@ -80,12 +142,18 @@ export class LeadManagementConfigComponent {
   displayedColumns: string[] = ['role', 'create', 'read', 'update', 'delete'];
   _selectedRole: string = "";
   selectedFunctions: string[] = [];
-  permissions: {role: string, functions: string[]}[] = [];
+  permissions: {role: string, functions: string[]}[] = [
+    {role: 'Salesman', functions: ['NO', 'NO', 'NO', 'NO']},
+    {role: 'BPO', functions: ['NO', 'NO', 'NO', 'NO']},
+    {role: 'Sales Manager', functions: ['NO', 'NO', 'NO', 'NO']}
+  ];
+  
 
   confirm() {
     // Find the index of the role in the permissions array
-    if(this.selectedRole){const index = this.permissions.findIndex(permission => permission.role === this.selectedRole);
-
+    if(this.selectedRole){
+      const index = this.permissions.findIndex(permission => permission.role === this.selectedRole);
+  
       if (index >= 0) {
         // If the role already exists in the permissions array, update its functions
         this.permissions[index].functions = this.selectedFunctions;
@@ -99,8 +167,10 @@ export class LeadManagementConfigComponent {
   
       // Detect changes and refresh table
       this.changeDetectorRefs.detectChanges();
-      this.table.renderRows();}
-    else {console.log("NO ROLE IS SELECTED")}
+      this.table.renderRows();
+    } else {
+      console.log("NO ROLE IS SELECTED");
+    }
   }
   set selectedRole(value: string) {
     this._selectedRole = value;
@@ -119,5 +189,8 @@ export class LeadManagementConfigComponent {
   get selectedRole(): string {
     return this._selectedRole;
   }
+  //ASSIGN FUNCTIONS
+  //ENTER EMPLOYEES
     
+  //ENTER EMPLOYEES
 }
