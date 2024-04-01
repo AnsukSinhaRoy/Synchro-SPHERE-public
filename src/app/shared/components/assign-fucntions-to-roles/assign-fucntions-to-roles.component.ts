@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-assign-fucntions-to-roles',
-  standalone: true,
-  imports: [],
   templateUrl: './assign-fucntions-to-roles.component.html',
-  styleUrl: './assign-fucntions-to-roles.component.css'
+  styleUrls: ['./assign-fucntions-to-roles.component.css'],
 })
 export class AssignFucntionsToRolesComponent {
-
 }
