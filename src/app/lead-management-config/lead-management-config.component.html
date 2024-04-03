@@ -35,7 +35,7 @@
           </ng-container>
         </mat-select>
       </mat-form-field>
-      <mat-chip-listbox [disabled]="!selectedFunctions || selectedFunctions.length === 0" aria-label="Function selection" multiple [(ngModel)]="selectedFunctions">
+      <mat-chip-listbox [disabled]=disableChips aria-label="Function selection" multiple [(ngModel)]="selectedFunctions">
         <mat-chip-option>CREATE</mat-chip-option>
         <mat-chip-option>READ</mat-chip-option>
         <mat-chip-option>UPDATE</mat-chip-option>

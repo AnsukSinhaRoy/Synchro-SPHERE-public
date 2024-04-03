@@ -141,14 +141,14 @@ export class LeadManagementConfigComponent {
   //ASSIGN FUNCTIONS
   displayedColumns: string[] = ['role', 'create', 'read', 'update', 'delete'];
   _selectedRole: string = "";
+  
   selectedFunctions: string[] = [];
+  disableChips = true;
   permissions: {role: string, functions: string[]}[] = [
     {role: 'Salesman', functions: ['NO', 'NO', 'NO', 'NO']},
     {role: 'BPO', functions: ['NO', 'NO', 'NO', 'NO']},
     {role: 'Sales Manager', functions: ['NO', 'NO', 'NO', 'NO']}
   ];
-  
-
   confirm() {
     // Find the index of the role in the permissions array
     if(this.selectedRole){
@@ -157,6 +157,7 @@ export class LeadManagementConfigComponent {
       if (index >= 0) {
         // If the role already exists in the permissions array, update its functions
         this.permissions[index].functions = this.selectedFunctions;
+        this.disableChips = false;
       } else {
         // If the role does not exist in the permissions array, add a new entry
         this.permissions.push({role: this.selectedRole, functions: this.selectedFunctions});
@@ -164,6 +165,7 @@ export class LeadManagementConfigComponent {
   
       this.selectedRole = '';
       this.selectedFunctions = [];
+      this.disableChips = true;
   
       // Detect changes and refresh table
       this.changeDetectorRefs.detectChanges();
@@ -181,9 +183,11 @@ export class LeadManagementConfigComponent {
     if (permission) {
       // If permissions for the selected role exist, set selectedFunctions to its functions
       this.selectedFunctions = permission.functions;
+      this.disableChips = false;
     } else {
       // If permissions for the selected role do not exist, clear selectedFunctions
       this.selectedFunctions = [];
+      this.disableChips = true;
     }
   }
   get selectedRole(): string {
