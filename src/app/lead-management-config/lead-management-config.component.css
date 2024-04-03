@@ -1,3 +1,4 @@
+HEAD
 
   .employee-table {
     width: 100%;
@@ -7,3 +8,93 @@
     padding-left: 1em;
     padding-right: 1em;
   }
+/* Import custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400&display=swap');
+
+/* General styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #007bff; /* Solid blue background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff; /* Set default text color to white */
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  border-radius: 20px; /* Rounded corners for container */
+}
+
+/* Heading styles */
+h1 {
+  text-align: center; /* Center the heading */
+  font-size: 36px; /* Increase font size */
+  font-family: 'Bebas Neue', sans-serif; /* Apply custom font */
+  color: #0f4682; /* Set heading color to blue */
+}
+
+/* Stepper styles */
+.mat-step-header,
+.mat-horizontal-stepper-header,
+.mat-step-icon {
+  background-color: #007bff;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.mat-step-header,
+.mat-step-label {
+  color: #fff;
+}
+
+.mat-step-header-selected .mat-step-label {
+  color: #007bff;
+}
+
+.mat-step-label {
+  font-family: 'Edu NSW ACT Foundation', sans-serif; /* Use custom font */
+  font-size: 20px;
+}
+
+.mat-step-icon {
+  color: #fff;
+}
+
+.mat-step-icon-state-done {
+  background-color: #28a745;
+}
+
+.mat-step-icon-state-edit {
+  background-color: #ffc107;
+}
+
+.mat-step-icon-state-error {
+  background-color: #dc3545;
+}
+
+.mat-stepper-horizontal-line {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.mat-stepper-horizontal-line-active {
+  background-color: #007bff;
+}
+
+.employee-table {
+  width: 100%;
+}
+
+.mat-cell, .mat-header-cell {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+>>>>>>> ce25bf6f436676cb09319a866c34234136f9aef8
