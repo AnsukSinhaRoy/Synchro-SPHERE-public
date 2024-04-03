@@ -21,8 +21,8 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favico.png",
-              "src/assets"
+              "src/Logo1.png",
+              "src/Logo1.png"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",

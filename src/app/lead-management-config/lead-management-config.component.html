@@ -1,95 +1,78 @@
-<mat-stepper #stepper>
-  <mat-step>
-    <div>
-      <h1>Mention the Roles Present in the company</h1>
-      <mat-form-field>
-        <mat-label>Enter Roles</mat-label>
-        <br>
-        <mat-chip-grid #chipGrid aria-label="Enter Roles">
-          @for (role of roles; track role) {
-          <mat-chip-row (removed)="remove(role)" [editable]="true" (edited)="edit(role, $event)"
-            [aria-description]="'press enter to edit ' + role.name">
-            {{role.name}}
-            <button matChipRemove [attr.aria-label]="'remove' + role.name">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-          }
-          <input placeholder="New Role..." [matChipInputFor]="chipGrid"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)" />
-        </mat-chip-grid>
-      </mat-form-field>
-      <br>
-      <button mat-raised-button color="primary" matStepperNext>Next</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <h1>Assign Functions to the Mentioned Roles</h1>
-    <div style="display: flex; gap: 10px">
-      <mat-form-field>
-        <mat-label>Select</mat-label>
-        <mat-select [(value)]="selectedRole">
-          @for (role of roles; track role) {
-            <mat-option [value]="role.name">{{role.name}}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <mat-chip-listbox aria-label="Function selection" multiple [(ngModel)]="selectedFunctions">
-        <mat-chip-option>CREATE</mat-chip-option>
-        <mat-chip-option>READ</mat-chip-option>
-        <mat-chip-option>UPDATE</mat-chip-option>
-        <mat-chip-option>DELETE</mat-chip-option>
-      </mat-chip-listbox>
-      <button mat-raised-button color="warn" (click)="confirm()">Confirm</button>
-    </div>
-    <div style="width: 450px; margin-top: 100px;">
-      <mat-table [dataSource]="permissions" class="mat-elevation-z8">
-      <!-- Role Column -->
-      <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef> Role </th>
-        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-      </ng-container>
-    
-      <!-- Create Column -->
-      <ng-container matColumnDef="create">
-        <th mat-header-cell *matHeaderCellDef> Create </th>
-        <td mat-cell *matCellDef="let element"> {{element.functions.includes('CREATE') ? 'YES' : 'NO'}} </td>
-      </ng-container>
-    
-      <!-- Read Column -->
-      <ng-container matColumnDef="read">
-        <th mat-header-cell *matHeaderCellDef> Read </th>
-        <td mat-cell *matCellDef="let element"> {{element.functions.includes('READ') ? 'YES' : 'NO'}} </td>
-      </ng-container>
-    
-      <!-- Update Column -->
-      <ng-container matColumnDef="update">
-        <th mat-header-cell *matHeaderCellDef> Update </th>
-        <td mat-cell *matCellDef="let element"> {{element.functions.includes('UPDATE') ? 'YES' : 'NO'}} </td>
-      </ng-container>
-    
-      <!-- Delete Column -->
-      <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> Delete </th>
-        <td mat-cell *matCellDef="let element"> {{element.functions.includes('DELETE') ? 'YES' : 'NO'}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </mat-table>
-    </div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Angular Material Stepper with Glass Morphism Effect</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Edu+NSW+ACT+Foundation:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="lead-management-config.component.css">
+  
+  <style>
+    /* Apply custom fonts */
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
 
-    <div>
-      <br>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-raised-button color="primary" matStepperNext>Next</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-raised-button color="primary" (click)="reset()" (click)="stepper.reset()">(Finish) Reset</button>
-    </div>
-  </mat-step>
-</mat-stepper>
+    h1 {
+      font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font to h1 elements */
+    }
+
+    .mat-step-label {
+      font-family: 'Edu NSW ACT Foundation', sans-serif; /* Apply Edu NSW ACT Foundation font to mat-step-label elements */
+    }
+  </style>
+</head>
+<body class="mat-typography">
+  <mat-stepper #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Mention the Roles Present in the company</ng-template>
+
+      <div>
+        <h1>Mention the Roles Present in the company</h1>
+        <mat-form-field>
+          <mat-label>Enter Roles</mat-label>
+          <br>
+          <mat-chip-grid #chipGrid aria-label="Enter Roles">
+            @for (role of roles; track role) {
+            <mat-chip-row (removed)="remove(role)" [editable]="true" (edited)="edit(role, $event)"
+              [aria-description]="'press enter to edit ' + role.name">
+              {{role.name}}
+              <button matChipRemove [attr.aria-label]="'remove' + role.name">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+            }
+            <input placeholder="New Role..." [matChipInputFor]="chipGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)" />
+          </mat-chip-grid>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" (click)="stepper.next()">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Assign Functions to the Mentioned Roles</ng-template>
+      <h1>Assign Functions to the Mentioned Roles</h1>
+      <div style="display: flex; gap: 10px">
+        <mat-form-field>
+          <mat-label>Select</mat-label>
+          <mat-select [(value)]="selectedRole">
+            @for (role of roles; track role) {
+              <mat-option [value]="role.name">{{role.name}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <!-- Other content for the step -->
+      </div>
+      <!-- Other content for the step -->
+    </mat-step>
+    <mat-step>
+      <!-- Content for the third step -->
+    </mat-step>
+  </mat-stepper>
+</body>
+</html>
