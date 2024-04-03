@@ -78,3 +78,12 @@ h1 {
 .mat-stepper-horizontal-line-active {
   background-color: #007bff;
 }
+
+.employee-table {
+  width: 100%;
+}
+
+.mat-cell, .mat-header-cell {
+  padding-left: 1em;
+  padding-right: 1em;
+}
