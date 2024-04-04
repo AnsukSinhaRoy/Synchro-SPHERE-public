@@ -5,14 +5,16 @@ import {MatTable, MatTableDataSource, MatTableModule} from '@angular/material/ta
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import {Component, ViewChild, inject, ChangeDetectorRef} from '@angular/core';
+import {Component, ViewChild, inject, ChangeDetectorRef, NgModule} from '@angular/core';
 import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
-
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Inject } from '@angular/core';
+import { EmployeeDialogComponent } from '../shared/employee-dialog/employee-dialog.component';
 export interface Roles {
   name: string;
 }
@@ -22,7 +24,6 @@ export interface Employee {
   email: string;
   role: string;
 }
-
 @Component({
   selector: 'app-lead-management-config',
   standalone: true,
@@ -52,19 +53,24 @@ export class LeadManagementConfigComponent {
   isLoading = true;
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private changeDetectorRefs: ChangeDetectorRef, private _formBuilder: FormBuilder, private fb: FormBuilder)
-   {
+  constructor(
+    private changeDetectorRefs: ChangeDetectorRef,
+    private _formBuilder: FormBuilder,
+    private fb: FormBuilder,
+    private dialog: MatDialog
+  ) {
     this.VOForm = this._formBuilder.group({
       VORows: this._formBuilder.array([])
     });  
   }
+  
   ngOnInit(): void {
     this.VOForm = this._formBuilder.group({
       VORows: this._formBuilder.array([])
     });
   
     this.employees = [
-      {id: 1, name: 'John Doe', email: 'john.doe@example.com', role: 'Manager'},
+      
     ];
   
     this.VOForm = this.fb.group({
@@ -195,6 +201,36 @@ export class LeadManagementConfigComponent {
   }
   //ASSIGN FUNCTIONS
   //ENTER EMPLOYEES
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EmployeeDialogComponent, {
+      width: '350px',
+      height:'350px',
+      data: {id: '', name: '', email: '', role: ''}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.addEmployee(result);
+      }
+    });
     
+  }
+  addEmployee(employee: Employee) {
+    this.employees.push(employee);
+    this.dataSource = new MatTableDataSource(this.employees);
+    this.table.renderRows();
+  }
+  
+  deleteEmployee(index: number) {
+    this.employees.splice(index, 1);
+    this.dataSource = new MatTableDataSource(this.employees);
+  }
+  getRoles(): Roles[] {
+    console.log(this.roles)
+    console.log("call get roles fnc")
+    return this.roles;
+  }
+  
   //ENTER EMPLOYEES
 }

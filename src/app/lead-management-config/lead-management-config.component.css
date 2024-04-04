@@ -77,11 +77,16 @@ h1 {
   background-color: #007bff;
 }
 
-.employee-table {
-  width: 100%;
-}
-
 .mat-cell, .mat-header-cell {
   padding-left: 1em;
   padding-right: 1em;
 }
+.new-employee {
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  padding: 32px 24px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
