@@ -109,7 +109,6 @@ export class LeadManagementConfigComponent {
     this.changeDetectorRefs.detectChanges();
   this.table.renderRows();
     event.chipInput!.clear();
-    this.setRoles();
   }
 
   remove(roles: Roles): void {
@@ -132,7 +131,6 @@ export class LeadManagementConfigComponent {
       // Detect changes and refresh table
       this.changeDetectorRefs.detectChanges();
       this.table.renderRows();
-      this.setRoles();
     }
   }
   
@@ -146,7 +144,6 @@ export class LeadManagementConfigComponent {
     if (index >= 0) {
       this.roles[index].name = value;
     }
-    this.setRoles();
   }
   //ASSIGN ROLES
   //ASSIGN FUNCTIONS
@@ -231,13 +228,9 @@ export class LeadManagementConfigComponent {
     this.employees.splice(index, 1);
     this.dataSource = new MatTableDataSource(this.employees);
   }
-  getRoles(): Roles[] {
-    console.log(this.roles)
-    console.log("call get roles fnc")
-    return this.roles;
-  }
   setRoles(){
     this._roleserv.roles=this.roles;
+    console.log(this.employees);
   }
   
   //ENTER EMPLOYEES
