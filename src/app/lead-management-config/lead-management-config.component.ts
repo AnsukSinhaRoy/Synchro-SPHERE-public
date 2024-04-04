@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { EmployeeDialogComponent } from '../shared/employee-dialog/employee-dialog.component';
+import { RolesService } from '../services/roles.service'; 
 export interface Roles {
   name: string;
 }
@@ -57,7 +58,8 @@ export class LeadManagementConfigComponent {
     private changeDetectorRefs: ChangeDetectorRef,
     private _formBuilder: FormBuilder,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _roleserv:RolesService
   ) {
     this.VOForm = this._formBuilder.group({
       VORows: this._formBuilder.array([])
@@ -107,6 +109,7 @@ export class LeadManagementConfigComponent {
     this.changeDetectorRefs.detectChanges();
   this.table.renderRows();
     event.chipInput!.clear();
+    this.setRoles();
   }
 
   remove(roles: Roles): void {
@@ -129,6 +132,7 @@ export class LeadManagementConfigComponent {
       // Detect changes and refresh table
       this.changeDetectorRefs.detectChanges();
       this.table.renderRows();
+      this.setRoles();
     }
   }
   
@@ -142,6 +146,7 @@ export class LeadManagementConfigComponent {
     if (index >= 0) {
       this.roles[index].name = value;
     }
+    this.setRoles();
   }
   //ASSIGN ROLES
   //ASSIGN FUNCTIONS
@@ -230,6 +235,9 @@ export class LeadManagementConfigComponent {
     console.log(this.roles)
     console.log("call get roles fnc")
     return this.roles;
+  }
+  setRoles(){
+    this._roleserv.roles=this.roles;
   }
   
   //ENTER EMPLOYEES
