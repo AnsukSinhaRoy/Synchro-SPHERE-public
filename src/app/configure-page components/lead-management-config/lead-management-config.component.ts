@@ -14,8 +14,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import { EmployeeDialogComponent } from '../shared/employee-dialog/employee-dialog.component';
-import { RolesService } from '../services/roles.service'; 
+import { EmployeeDialogComponent } from '../../shared/employee-dialog/employee-dialog.component';
+import { RolesService } from '../../services/roles.service'; 
 export interface Roles {
   name: string;
 }
@@ -205,8 +205,8 @@ export class LeadManagementConfigComponent {
   //ENTER EMPLOYEES
   openDialog(): void {
     const dialogRef = this.dialog.open(EmployeeDialogComponent, {
-      width: '350px',
-      height:'350px',
+      width: '250px',   
+      height:'400px',
       data: {id: '', name: '', email: '', role: ''}
     });
   

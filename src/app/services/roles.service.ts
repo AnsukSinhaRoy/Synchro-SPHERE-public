@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Roles } from '../lead-management-config/lead-management-config.component';
+import { Roles } from '../configure page components/lead-management-config/lead-management-config.component';
 
 @Injectable({
   providedIn: 'root'
