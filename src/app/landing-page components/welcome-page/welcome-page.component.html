@@ -1,1 +1,7 @@
-<p>welcome-page works!</p>
+<h1 class="welcome-header">Welcome {{ organizationName }}!</h1>
+<p class="module-selection">You have selected the following modules:</p>
+<mat-list>
+  <mat-list-item *ngFor="let module of modules">{{ module.name }}</mat-list-item>
+</mat-list>
+<p class="config-instruction">Let's get started with configuring the module for your organizational needs</p>
+<button mat-raised-button color="primary" routerLink="/configure" class="get-started-button">Get Started</button>

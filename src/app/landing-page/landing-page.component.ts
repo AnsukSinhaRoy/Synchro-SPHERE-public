@@ -6,11 +6,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ERPModule } from './erpmodule.interface';
+import { LandingPageDataService } from '../services/landing-page-data.service';
+import { Router } from '@angular/router';
 
-export interface ERPModule {
-  name: string;
-  checked: boolean;
-}
 
 @Component({
   selector: 'app-landing-page',
@@ -20,8 +19,9 @@ export interface ERPModule {
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
+  
   organizationName: string = '';
-  constructor(private snackBar: MatSnackBar
+  constructor(private snackBar: MatSnackBar,private _dataservice: LandingPageDataService, private router: Router
   ) {
     // ...
   }
@@ -49,16 +49,19 @@ export class LandingPageComponent {
   confirm() {
     if (!this.organizationName) {
       this.snackBar.open('Please enter the organization name', 'OK', {
-        duration: 5000,
+        duration: 3500,
       });
     } else if (this.modules.every(module => !module.checked)) {
       this.snackBar.open('Select some component', 'Add All', {
-        duration: 5000,
+        duration: 3500,
       }).onAction().subscribe(() => {
         this.setAll(true);
       });
     } else {
-      console.log(this.modules);
+      this._dataservice.setOrganizationName(this.organizationName);
+    this._dataservice.setModules(this.modules);
+
+    this.router.navigate(['/welcome']);
     }
   }
 }
