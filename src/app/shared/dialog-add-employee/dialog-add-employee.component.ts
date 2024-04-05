@@ -10,24 +10,25 @@ import { RolesService } from '../../services/roles.service';
 export interface Roles {
   name: string;
 }
-
 @Component({
-  selector: 'app-employee-dialog',
-  templateUrl: './employee-dialog.component.html',
+  selector: 'app-dialog-add-employee',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, MatSelectModule]
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, MatSelectModule],
+  templateUrl: './dialog-add-employee.component.html',
+  styleUrl: './dialog-add-employee.component.css'
 })
-export class EmployeeDialogComponent {
+export class DialogAddEmployeeComponent {
   form: FormGroup;
   roles: Roles[] = [{name: 'Salesman'}, {name: 'BPO'}, {name: 'Sales Manager'}];
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EmployeeDialogComponent>,
+    public dialogRef: MatDialogRef<DialogAddEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private rolesService: RolesService 
   ) {
-    this.roles = this.rolesService.getRoles();
+
+    this.roles = this.rolesService.setRoles();
     this.form = this.fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],

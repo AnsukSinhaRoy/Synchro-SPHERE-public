@@ -1,0 +1,18 @@
+<mat-form-field>
+    <mat-label>Mention Roles</mat-label>
+    <br>
+    <mat-chip-grid #chipGrid aria-label="Enter Roles">
+      @for (role of roles; track role) {
+      <mat-chip-row (removed)="remove(role)" [editable]="true"
+        [aria-description]="'press enter to edit ' + role.name">
+        {{role.name}}
+        <button matChipRemove [attr.aria-label]="'remove' + role.name">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+      }
+      <input placeholder="New Role..." [matChipInputFor]="chipGrid"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)" />
+    </mat-chip-grid>
+  </mat-form-field>

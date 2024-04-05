@@ -14,8 +14,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import { EmployeeDialogComponent } from '../../shared/employee-dialog/employee-dialog.component';
 import { RolesService } from '../../services/roles.service'; 
+import { DialogAddEmployeeComponent } from '../../shared/dialog-add-employee/dialog-add-employee.component';
 export interface Roles {
   name: string;
 }
@@ -109,6 +109,7 @@ export class LeadManagementConfigComponent {
     this.changeDetectorRefs.detectChanges();
   this.table.renderRows();
     event.chipInput!.clear();
+    this.setRoles();
   }
 
   remove(roles: Roles): void {
@@ -131,6 +132,7 @@ export class LeadManagementConfigComponent {
       // Detect changes and refresh table
       this.changeDetectorRefs.detectChanges();
       this.table.renderRows();
+      this.setRoles();
     }
   }
   
@@ -204,7 +206,7 @@ export class LeadManagementConfigComponent {
   //ASSIGN FUNCTIONS
   //ENTER EMPLOYEES
   openDialog(): void {
-    const dialogRef = this.dialog.open(EmployeeDialogComponent, {
+    const dialogRef = this.dialog.open(DialogAddEmployeeComponent, {
       width: '250px',   
       height:'400px',
       data: {id: '', name: '', email: '', role: ''}
@@ -229,7 +231,10 @@ export class LeadManagementConfigComponent {
     this.dataSource = new MatTableDataSource(this.employees);
   }
   setRoles(){
+    console.log(this.roles)
+    console.log("SETROLES")
     this._roleserv.roles=this.roles;
+    console.log(this.roles)
     console.log(this.employees);
   }
   

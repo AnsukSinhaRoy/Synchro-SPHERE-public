@@ -11,9 +11,9 @@ export class RolesService {
   constructor() {
   }
 
-  getRoles(): Roles[] {
-    // TODO: Fetch your roles data here
-    console.log("here")
+
+  setRoles(): Roles[] {
+    console.log("ROLES SERVICE SAYS")
     console.log(this.roles)
     return this.roles;
   }
