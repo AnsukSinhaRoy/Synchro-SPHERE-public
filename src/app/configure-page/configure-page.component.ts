@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import {MatTabChangeEvent, MatTabsModule} from '@angular/material/tabs';
+import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { LeadManagementConfigComponent } from '../configure-page components/lead-management-config/lead-management-config.component';
 import { CustomerRelationshipManagementConfigComponent } from '../configure-page components/customer-relationship-management-config/customer-relationship-management-config.component';
 import { TravelManagementConfigComponent } from '../configure-page components/travel-management-config/travel-management-config.component';
-
+export interface ERPModule {
+  name: string;
+  checked: boolean;
+}
 @Component({
   selector: 'app-configure-page',
   standalone: true,
@@ -11,13 +14,18 @@ import { TravelManagementConfigComponent } from '../configure-page components/tr
   templateUrl: './configure-page.component.html',
   styleUrl: './configure-page.component.css'
 })
-export class ConfigurePageComponent {
-  tabLabels = ['Customer Relationship Management', 'Lead Management', 'Travel management'];
-  tabVisibility = [false, true, true];
-  selectedIndex = this.tabVisibility.indexOf(true);
-  selectedTabLabel: string | undefined; // Declare selectedTabLabel here
-
-  onTabChange(event: MatTabChangeEvent) {
-    this.selectedTabLabel = this.tabLabels[event.index];
+export class ConfigurePageComponent implements OnInit {
+  modules: ERPModule[] = [
+    { name: 'Customer Relationship Management', checked: false },
+    { name: 'Lead Management', checked: true },
+    { name: 'Travel management', checked: false }
+  ];
+  selectedIndex = 0;
+  ngOnInit() {
+    // Find the index of the first module that is checked
+    const firstCheckedModule = this.modules.find(module => module.checked);
+    if (firstCheckedModule) {
+      this.selectedIndex = this.modules.indexOf(firstCheckedModule);
+    }
   }
 }

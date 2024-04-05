@@ -1,20 +1,23 @@
 <mat-tab-group [selectedIndex]="selectedIndex">
-    @for (label of tabLabels; track label; let idx=$index) {
-      @if (tabVisibility[idx]) {
-        <mat-tab label="{{ label }}">
-            <ng-template matTabContent>
-                @if (label === 'Customer Relationship Management') {
-                  <app-customer-relationship-management-config></app-customer-relationship-management-config>
-                } @else if (label === 'Lead Management') {
-                  <app-lead-management-config></app-lead-management-config>
-                } @else if (label === 'Travel management') {
-                  <app-travel-management-config></app-travel-management-config>
-                }
-              </ng-template>
-        </mat-tab>
-      } @else {
-        <mat-tab label="{{ label }}" disabled> Content for {{ label }} </mat-tab>
-      }
+  @for (module of modules; track module; let idx=$index) {
+    @if (module.checked) {
+      <mat-tab label="{{ module.name }}">
+        <ng-template matTabContent>
+          @switch (module.name) {
+            @case ('Customer Relationship Management') {
+              <app-customer-relationship-management-config></app-customer-relationship-management-config>
+            }
+            @case ('Lead Management') {
+              <app-lead-management-config></app-lead-management-config>
+            }
+            @case ('Travel management') {
+              <app-travel-management-config></app-travel-management-config>
+            }
+          }
+        </ng-template>
+      </mat-tab>
+    } @else {
+      <mat-tab label="{{ module.name }}" disabled> Content for {{ module.name }} </mat-tab>
     }
-  </mat-tab-group>
-  
+  }
+</mat-tab-group>

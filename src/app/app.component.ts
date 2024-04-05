@@ -12,3 +12,7 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'Synchro-SPHERE';
 }
+export interface ERPModule {
+  name: string;
+  checked: boolean;
+}
