@@ -63,6 +63,7 @@ export class LandingPageComponent {
       //this.router.navigate(['/welcome']);
       this.dialog.open(DialogRegisterOrganizationComponent, {
         width:'600px',
+        height:'600px',
         data: { name: '', email: '', organizationName: '', phoneNumber: '' }
       });
     }
