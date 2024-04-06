@@ -4,4 +4,4 @@
   <mat-list-item *ngFor="let module of modules">{{ module.name }}</mat-list-item>
 </mat-list>
 <p class="config-instruction">Let's get started with configuring the module for your organizational needs</p>
-<button mat-raised-button color="primary" routerLink="/configure" class="get-started-button">Get Started</button>
+<button mat-raised-button color="primary" class="get-started-button" (click)="getStarted()">Get Started</button>

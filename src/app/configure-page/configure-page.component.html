@@ -1,23 +1,19 @@
 <mat-tab-group [selectedIndex]="selectedIndex">
   @for (module of modules; track module; let idx=$index) {
-    @if (module.checked) {
-      <mat-tab label="{{ module.name }}">
-        <ng-template matTabContent>
-          @switch (module.name) {
-            @case ('Customer Relationship Management') {
-              <app-customer-relationship-management-config></app-customer-relationship-management-config>
-            }
-            @case ('Lead Management') {
-              <app-lead-management-config></app-lead-management-config>
-            }
-            @case ('Travel management') {
-              <app-travel-management-config></app-travel-management-config>
-            }
+    <mat-tab label="{{ module.name }}" [disabled]="!module.checked">
+      <ng-template matTabContent>
+        @if (module.checked) {
+          @if (module.name === 'Customer Relationship Management') {
+            <app-customer-relationship-management-config></app-customer-relationship-management-config>
+          } @else if (module.name === 'Lead Management') {
+            <app-lead-management-config></app-lead-management-config>
+          } @else if (module.name === 'Travel management') {
+            <app-travel-management-config></app-travel-management-config>
           }
-        </ng-template>
-      </mat-tab>
-    } @else {
-      <mat-tab label="{{ module.name }}" disabled> Content for {{ module.name }} </mat-tab>
-    }
+        } @else {
+          Content for {{ module.name }}
+        }
+      </ng-template>
+    </mat-tab>
   }
 </mat-tab-group>

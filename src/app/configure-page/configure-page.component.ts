@@ -4,6 +4,8 @@ import { LeadManagementConfigComponent } from '../configure-page components/lead
 import { CustomerRelationshipManagementConfigComponent } from '../configure-page components/customer-relationship-management-config/customer-relationship-management-config.component';
 import { TravelManagementConfigComponent } from '../configure-page components/travel-management-config/travel-management-config.component';
 import { ERPModule } from '../landing-page/erpmodule.interface';
+import { LandingPageDataService } from '../services/landing-page-data.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-configure-page',
   standalone: true,
@@ -13,17 +15,20 @@ import { ERPModule } from '../landing-page/erpmodule.interface';
 })
 
 export class ConfigurePageComponent {
-  modules: ERPModule[] = [
-    { name: 'Customer Relationship Management', checked: false },
-    { name: 'Lead Management', checked: true },
-    { name: 'Travel management', checked: true }
-  ];
-  
+  modules: ERPModule[] = [];
   selectedIndex = 0;
-  ngOnInit() {
+  constructor(private dataService: LandingPageDataService, private router: Router) {
+    this.modules = this.dataService.getModules().filter(module => module.checked);
+    if (this.modules.length === 0) {
+      this.router.navigate(['']);
+    }
+  }
+}
+/*
+ngOnInit() {
     const firstCheckedModule = this.modules.find(module => module.checked);
     if (firstCheckedModule) {
       this.selectedIndex = this.modules.indexOf(firstCheckedModule);
     }
   }
-}
+ */

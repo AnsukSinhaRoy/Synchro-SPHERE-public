@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {FormsModule} from '@angular/forms';
-import {NgFor} from '@angular/common';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { NgFor } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,21 +14,21 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [MatCheckboxModule, NgFor, FormsModule, MatButtonModule, MatFormField, MatLabel,MatInputModule],
+  imports: [MatCheckboxModule, NgFor, FormsModule, MatButtonModule, MatFormField, MatLabel, MatInputModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
-  
+
   organizationName: string = '';
-  constructor(private snackBar: MatSnackBar,private _dataservice: LandingPageDataService, private router: Router
+  constructor(private snackBar: MatSnackBar, private _dataservice: LandingPageDataService, private router: Router
   ) {
     // ...
   }
   modules: ERPModule[] = [
-    {name: 'Travel Management', checked: false},
-    {name: 'Lead Management', checked: false},
-    {name: 'Customer Relationship Management', checked: false}
+    { name: 'Travel Management', checked: false },
+    { name: 'Lead Management', checked: false },
+    { name: 'Customer Relationship Management', checked: false }
   ];
 
   allComplete: boolean = false;
@@ -59,9 +59,8 @@ export class LandingPageComponent {
       });
     } else {
       this._dataservice.setOrganizationName(this.organizationName);
-    this._dataservice.setModules(this.modules);
-
-    this.router.navigate(['/welcome']);
+      this._dataservice.setModules(this.modules);
+      this.router.navigate(['/welcome']);
     }
   }
 }

@@ -23,6 +23,7 @@ export class LandingPageDataService {
   }
 
   getModules() {
+    console.log(this.modules)
     return this.modules;
   }
 }
