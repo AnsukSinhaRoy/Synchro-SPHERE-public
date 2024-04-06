@@ -1,29 +1,113 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400&display=swap');
 
-  .example-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 16px;
-  }
-  
-  .example-list-section {
-    width: 50%;
-  }
-  
-  .example-margin {
-    margin: 0 8px;
-  }
-  
-  mat-form-field {
-    width: 400px;
-    margin-bottom: 16px;
-  }
-  
-  button {
-    display: block;
-    margin: 0 auto;
-  }
-  
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0; /* Set a light background color */
+}
+
+/* Landing page container */
+.landing {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), url('bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Content inside landing page */
+.content {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.content h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 70px;
+  margin-top: 0;
+}
+
+.content p {
+  font-size: 20px;
+}
+
+/* Glassmorphism box styling */
+.glassmorphism-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+/* Checkbox section styling */
+.example-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-list-section {
+  width: 48%; /* Adjust to 48% to allow space for spacing between checkboxes */
+}
+
+.example-list-section .checkbox-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Checkbox styling */
+.mat-checkbox-frame {
+  border-color: white !important; /* Set checkbox border color to white */
+}
+
+.mat-checkbox-checked .mat-checkbox-background {
+  border-color: white !important; /* Set checked state checkbox border color to white */
+}
+
+.mat-checkbox-label {
+  color: white; 
+  margin-right: 10px;
+}
+
+
+/* Button styling */
+mat-form-field {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+button {
+  width: 200px;
+  border-radius: 8px;
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}

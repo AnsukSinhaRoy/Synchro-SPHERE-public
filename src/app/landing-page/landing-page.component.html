@@ -1,23 +1,45 @@
-<section class="example-section">
-    <span class="example-list-section">
-        <mat-checkbox class="example-margin" [checked]="allComplete"
-            [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="landing-page.component.css">
+  <!-- Add any other meta tags or external scripts here -->
+</head>
+<body>
+  <div class="landing">
+    <div class="content">
+      <h1>Welcome to Synchro-SPHERE</h1>
+      <p>Choose the module(s) you want to use for your organization</p>
+    </div>
+    <div class="glassmorphism-box">
+      <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allComplete"
+                        [indeterminate]="someComplete()"
+                        (change)="setAll($event.checked)"
+                        style="color: white; font-weight: bold;">
             All Components
-        </mat-checkbox>
-    </span>
-    <span class="example-list-section">
-        <ul>
-            <li *ngFor="let module of modules">
-                <mat-checkbox [(ngModel)]="module.checked"
-                    (ngModelChange)="updateAllComplete()">
-                    {{module.name}}
-                </mat-checkbox>
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul class="checkbox-list">
+            <li *ngFor="let module of modules" class="checkbox-item">
+              <mat-checkbox [(ngModel)]="module.checked" (ngModelChange)="updateAllComplete()">
+                <span class="mat-checkbox-label">{{ module.name }}</span>
+              </mat-checkbox>
             </li>
-        </ul>
-    </span>
-</section>
-<mat-form-field appearance="fill">
-    <mat-label>Organization Name</mat-label>
-    <input matInput [(ngModel)]="organizationName" placeholder="Enter organization name">
-  </mat-form-field>
-<button mat-raised-button color="primary" (click)="confirm()">Confirm</button>
+          </ul>
+        </span>
+      </section>
+    </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Organization Name</mat-label>
+        <input matInput [(ngModel)]="organizationName" placeholder=" "> 
+      </mat-form-field>      
+    <button mat-raised-button color="primary" (click)="confirm()">Confirm</button>
+  </div>
+</body>
+</html>
