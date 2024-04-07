@@ -1,5 +1,11 @@
-<h1 class="welcome-header">Welcome {{ organizationName }}!</h1>
+<link rel="stylesheet" href="welcome-page.component.css">
+<div id="main">
+  <div class="container">
+<h3 class="welcome-header">Welcome</h3>
+<h1>{{ organizationName }}!</h1>
 <p class="module-selection">You have selected the following modules:</p>
+</div>
+<div class="info">
 <div class="module-cards">
   <mat-card *ngFor="let module of modules; index as i" class="example-card" (click)="getStarted()">
     <mat-card-content>
@@ -7,5 +13,16 @@
     </mat-card-content>
   </mat-card>
 </div>
-<p class="config-instruction">Let's get started with configuring the module for your organizational needs</p>
-<button mat-raised-button color="primary" class="get-started-button" (click)="getStarted()">Get Started</button>
+<p class="config-instruction">Start configuring the module for your organizational needs...</p>
+<div class="button1">
+<button mat-raised-button color="primary" class="get-started-button" (click)="getStarted()" 
+style=" width: 225x;
+border-radius: 8px;
+background-color: #0255a9;
+color: white;
+padding: 10px 20px;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s ease, color 0.3s ease;">Get Started</button></div>
+</div>
+</div>
