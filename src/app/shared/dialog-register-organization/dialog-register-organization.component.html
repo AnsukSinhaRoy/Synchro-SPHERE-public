@@ -46,7 +46,7 @@
             </mat-form-field>
             <mat-form-field class="email-place">
                 <mat-label>Your contact Mobile Number</mat-label>
-                <input type="tel" matInput formControlName="mobile" placeholder="1234567890">
+                <input type="tel" matInput formControlName="phoneNumber" placeholder="1234567890">
                 <mat-icon matSuffix>phone</mat-icon>
                 <mat-hint><strong>Mobile Number is mandatory</strong></mat-hint>
                 <mat-error *ngIf="form.controls['phoneNumber'].hasError('required')">

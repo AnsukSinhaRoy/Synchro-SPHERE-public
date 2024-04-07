@@ -24,7 +24,7 @@ export class DialogRegisterOrganizationComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', Validators.email],
     organizationName: ['', Validators.required],
     phoneNumber: ['', Validators.compose([Validators.required, Validators.pattern(/^\d{10}$/)])]
   });
@@ -36,5 +36,4 @@ export class DialogRegisterOrganizationComponent {
       this.dialogRef.close(this.form.value);
     }
   }
-  
 }
