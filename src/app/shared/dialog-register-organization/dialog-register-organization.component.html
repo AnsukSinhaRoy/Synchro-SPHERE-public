@@ -1,7 +1,13 @@
-<h1 mat-dialog-title style="margin-top: 5px; margin-left: 15px;">Enter your information</h1>
+<link rel="Stylesheet" href="dialog-register-organization.component.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Edu+NSW+ACT+Foundation:wght@400..700&family=Teko:wght@300..700&family=Tilt+Neon&display=swap" rel="stylesheet">
+
+<div class="form">
+<h1 mat-dialog-title style="margin-top: 5px; display: flex; justify-content: center; align-items: center;">Enter Your Information</h1>
 <mat-dialog-content>
     <div class="container">
-        <img src="./Logo1.png" alt="no photo" class="logo">
+        <img src="./Logo1.png" alt="SynchoSPHERE" class="logo">
         <form [formGroup]="form" (ngSubmit)="save()">
             <mat-form-field class="email-place">
                 <mat-label>Your Name</mat-label>
@@ -62,8 +68,39 @@
 <div mat-dialog-actions>
     <div style="display: flex; justify-content: space-between;
     align-items: center; margin: 20px;">
-        <button mat-button  (click)="dialogRef.close()">Cancel</button>
-        <button mat-button  (click)="save()" [disabled]="!form.valid">Save</button>
+     <button mat-button (click)="dialogRef.close()"
+     style=" border-radius: 20px;
+     padding: 10px 20px;
+     color: white;
+     background-color: #0c3455;
+     border: none;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+     
+     &:hover
+     {background-color: #b1d7fa; 
+      color: black;}">
+     Cancel
+ </button>
+ 
+ <button mat-button (click)="save()" [disabled]="!form.valid"
+ style=" border-radius: 20px;
+     padding: 10px 20px;
+     color: white;
+     background-color: #0c3455;
+     border: none;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+     &:disabled{
+        background-color: #b1d7fa; 
+     }
+     &:hover
+     {background-color: #b1d7fa; 
+      color: black;}">
+     Save
+ </button>
+ 
     </div>
 
+</div>
 </div>
