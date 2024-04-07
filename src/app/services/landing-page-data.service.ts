@@ -7,7 +7,7 @@ import { ERPModule } from '../landing-page/erpmodule.interface';
 export class LandingPageDataService {
   organizationName: string = '';
   modules: ERPModule[] = [];
-
+  landingPageData: any;
   constructor() { }
 
   setOrganizationName(name: string) {
@@ -16,6 +16,10 @@ export class LandingPageDataService {
 
   setModules(modules: ERPModule[]) {
     this.modules = modules;
+  }
+  setLandingPageData(data: any) {
+    this.landingPageData = data;
+    console.log(this.landingPageData)
   }
 
   getOrganizationName() {

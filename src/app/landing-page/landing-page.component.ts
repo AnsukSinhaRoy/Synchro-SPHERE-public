@@ -21,9 +21,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
-
+  landingPageData: any = {};
   organizationName: string = '';
-  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _dataservice: LandingPageDataService, private router: Router
+  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router
   ) {
     // ...
   }
@@ -47,7 +47,6 @@ export class LandingPageComponent {
     this.allComplete = checked;
     this.modules.forEach(module => (module.checked = checked));
   }
-
   confirm() {
     if (this.modules.every(module => !module.checked)) {
       this.snackBar.open('Select some component', 'Add All', {
@@ -59,12 +58,24 @@ export class LandingPageComponent {
     else 
     {
       //this._dataservice.setOrganizationName(this.organizationName);
-      this._dataservice.setModules(this.modules);
+      this._LandingPagedataservice.setModules(this.modules);
       //this.router.navigate(['/welcome']);
-      this.dialog.open(DialogRegisterOrganizationComponent, {
+      const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
         width:'600px',
         height:'490px',
         data: { name: '', email: '', organizationName: '', phoneNumber: '' }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          console.log(result);
+          this.landingPageData = {
+            modules: this.modules,
+            result: result
+          };
+          this._LandingPagedataservice.setLandingPageData(this.landingPageData);
+          this._LandingPagedataservice.setOrganizationName(result.organizationName);
+          this.router.navigate(['/welcome']);
+        }
       });
     }
   }
