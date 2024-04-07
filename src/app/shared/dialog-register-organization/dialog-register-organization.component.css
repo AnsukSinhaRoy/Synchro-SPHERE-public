@@ -1,4 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400&display=swap');
+
+.form{
+
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+
+  /* Glassmorphism effect */
+  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  h1{
+      
+      margin: 3px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: #f0f0f0; /* Set a light background color */
+      color: rgb(1, 1, 50);
+      font-family: "Teko", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: normal;
+      font-size: 50px;
+  }
+}
+
 .main-card {
+  
     border-radius: 16px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     margin: 10px;
@@ -24,7 +53,29 @@
     align-items: center;
   }
   
+  .mat-dialog-actions{
+  
+  button {
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #0c3455;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  &:hover {
+    background-color: #b1d7fa; 
+    color: black;
+  }
+}
+  
   .logo {
     width: 200px; /* Adjust as needed */
     margin-right: 20px; /* Adjust as needed */
   }
+
+
+  
