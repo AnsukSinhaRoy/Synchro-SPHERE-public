@@ -7,8 +7,7 @@ import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
     {path:'configure',component:ConfigurePageComponent},
-    /*{path:'', component:LandingPageComponent},*/
-    {path:'', component:WelcomePageComponent},
+    {path:'', component:LandingPageComponent},
     {path:'welcome', component:WelcomePageComponent},
     {path:'try', component:AddRolesComponent}
 ];

@@ -23,11 +23,12 @@ export class WelcomePageComponent {
   ];
 
   constructor(private dataService: LandingPageDataService, private router: Router) {
-    /*this.organizationName = this.dataService.getOrganizationName();
+    this.organizationName = this.dataService.getOrganizationName();
     this.modules = this.dataService.getModules().filter(module => module.checked);
+    console.log(this.modules)
     if (this.modules.length === 0) {
       this.router.navigate(['']);
-    }*/
+    }
   }
   getStarted(){
     console.log("Get Started is clicked")
