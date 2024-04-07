@@ -24,7 +24,7 @@ export class DialogRegisterOrganizationComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    email: ['', Validators.email],
+    email: ['', Validators.compose([Validators.required,Validators.email])],
     organizationName: ['', Validators.required],
     phoneNumber: ['', Validators.compose([Validators.required, Validators.pattern(/^\d{10}$/)])]
   });

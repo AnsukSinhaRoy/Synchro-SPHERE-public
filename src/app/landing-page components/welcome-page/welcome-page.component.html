@@ -1,7 +1,11 @@
 <h1 class="welcome-header">Welcome {{ organizationName }}!</h1>
 <p class="module-selection">You have selected the following modules:</p>
-<mat-list>
-  <mat-list-item *ngFor="let module of modules">{{ module.name }}</mat-list-item>
-</mat-list>
+<div class="module-cards">
+  <mat-card *ngFor="let module of modules; index as i" class="example-card" (click)="getStarted()">
+    <mat-card-content>
+      <p>{{ module.name }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
 <p class="config-instruction">Let's get started with configuring the module for your organizational needs</p>
 <button mat-raised-button color="primary" class="get-started-button" (click)="getStarted()">Get Started</button>

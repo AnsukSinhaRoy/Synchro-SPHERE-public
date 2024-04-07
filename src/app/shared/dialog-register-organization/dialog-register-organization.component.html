@@ -11,7 +11,7 @@
         <form [formGroup]="form" (ngSubmit)="save()">
             <mat-form-field class="email-place">
                 <mat-label>Your Name</mat-label>
-                <input type="text" matInput formControlName="name" placeholder="Avarage Joe">
+                <input type="text" matInput formControlName="name" placeholder="Contact person name">
                 <mat-icon matSuffix>person</mat-icon>
                 <mat-hint><strong>Name is mandatory</strong></mat-hint>
                 <mat-error *ngIf="form.controls['name'].hasError('required')">
@@ -38,7 +38,7 @@
             </mat-form-field>
             <mat-form-field class="email-place">
                 <mat-label>Organization Name</mat-label>
-                <input type="text" matInput formControlName="organizationName" placeholder="xyz private limited">
+                <input type="text" matInput formControlName="organizationName" placeholder="Organization Name">
                 <mat-hint><strong>Organization Name is mandatory</strong></mat-hint>
                 <mat-error *ngIf="form.controls['organizationName'].hasError('required')">
                     First Name is <strong>required</strong>
@@ -73,7 +73,7 @@
  </button>
  
  <button mat-button (click)="save()" [disabled]="!form.valid" style="color:blanchedalmond">
-     Save
+     Register to SynchroSPHERE
  </button>
  
     </div>
