@@ -53,12 +53,13 @@
     align-items: center;
   }
   .logo {
-    width: 400px; /* Adjust as needed */
-    margin-right: 20px; /* Adjust as needed */
+    width: 400px;
+    margin-right: 20px; 
   }
 
 button {
-  border-radius: 20px;
+  width: 150px;
+  border-radius: 30px;
   padding: 10px 20px;
   color: white;
   background-color: #0c3455;
@@ -68,11 +69,12 @@ button {
 }
 
 button:disabled {
-  background-color: #b1d7fa;
+  background-color: #505050;
+  
 }
 
 button:hover {
-  background-color: #b1d7fa;
+  background-color: #43a3fd;
   color: black;
 }
 

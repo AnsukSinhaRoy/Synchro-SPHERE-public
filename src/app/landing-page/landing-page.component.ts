@@ -61,8 +61,7 @@ export class LandingPageComponent {
       this._LandingPagedataservice.setModules(this.modules);
       //this.router.navigate(['/welcome']);
       const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
-        width:'800px',
-        height:'578px',
+        width:'900px',
         data: { name: '', email: '', organizationName: '', phoneNumber: '' }
       });
       dialogRef.afterClosed().subscribe(result => {
