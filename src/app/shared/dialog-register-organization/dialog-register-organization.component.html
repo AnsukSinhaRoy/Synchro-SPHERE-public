@@ -83,20 +83,7 @@
      Cancel
  </button>
  
- <button mat-button (click)="save()" [disabled]="!form.valid"
- style=" border-radius: 20px;
-     padding: 10px 20px;
-     color: white;
-     background-color: #0c3455;
-     border: none;
-     cursor: pointer;
-     transition: background-color 0.3s ease;
-     &:disabled{
-        background-color: #b1d7fa; 
-     }
-     &:hover
-     {background-color: #b1d7fa; 
-      color: black;}">
+ <button mat-button (click)="save()" [disabled]="!form.valid">
      Save
  </button>
  

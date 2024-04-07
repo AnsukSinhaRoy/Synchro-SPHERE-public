@@ -52,30 +52,28 @@
     justify-content: space-between;
     align-items: center;
   }
-  
-  .mat-dialog-actions{
-  
-  button {
-    border-radius: 20px;
-    padding: 10px 20px;
-    color: white;
-    background-color: #0c3455;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  
-  &:hover {
-    background-color: #b1d7fa; 
-    color: black;
-  }
-}
-  
   .logo {
     width: 200px; /* Adjust as needed */
     margin-right: 20px; /* Adjust as needed */
   }
 
+button {
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: white;
+  background-color: #0c3455;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #b1d7fa;
+}
+
+button:hover {
+  background-color: #b1d7fa;
+  color: black;
+}
 
   
