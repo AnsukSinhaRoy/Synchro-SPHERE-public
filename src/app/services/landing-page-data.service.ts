@@ -5,8 +5,14 @@ import { ERPModule } from '../landing-page/erpmodule.interface';
   providedIn: 'root'
 })
 export class LandingPageDataService {
-  organizationName: string = '';
-  modules: ERPModule[] = [];
+  organizationName: string = 'DEMO ORGANIZATION NAME';
+  modules: ERPModule[] = [
+    { name: 'Finance', checked: true },
+    { name: 'Human Resources (HR)', checked: false },
+    { name: 'Manufacturing and logistics', checked: true },
+    { name: 'Supply Chain Management (SCM)', checked: true },
+    { name: 'Customer Relationship Management (CRM)', checked: true },
+  ];
   landingPageData: any;
   constructor() { }
 

@@ -27,11 +27,7 @@ export class LandingPageComponent {
   ) {
     // ...
   }
-  modules: ERPModule[] = [
-    { name: 'Travel Management', checked: false },
-    { name: 'Lead Management', checked: false },
-    { name: 'Customer Relationship Management', checked: false }
-  ];
+  modules: ERPModule[] = this._LandingPagedataservice.getModules();
 
   allComplete: boolean = false;
 
@@ -58,8 +54,8 @@ export class LandingPageComponent {
     else 
     {
       //this._dataservice.setOrganizationName(this.organizationName);
-      this._LandingPagedataservice.setModules(this.modules);
       //this.router.navigate(['/welcome']);
+      this._LandingPagedataservice.setModules(this.modules);
       const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
         width:'900px',
         data: { name: '', email: '', organizationName: '', phoneNumber: '' }

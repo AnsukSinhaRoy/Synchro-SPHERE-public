@@ -15,12 +15,8 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './welcome-page.component.css'
 })
 export class WelcomePageComponent {
-  organizationName: string = 'DEMO ORGANIZATION PAGE';
-  modules: ERPModule[] = [
-    { name: 'Travel Management', checked: true },
-    { name: 'Lead Management', checked: true },
-    { name: 'Customer Relationship Management', checked: true }
-  ];
+  organizationName: string = '';
+  modules: ERPModule[] = [];
 
   constructor(private dataService: LandingPageDataService, private router: Router) {
     this.organizationName = this.dataService.getOrganizationName();
