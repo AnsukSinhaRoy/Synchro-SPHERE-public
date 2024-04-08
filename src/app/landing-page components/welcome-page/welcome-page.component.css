@@ -21,7 +21,7 @@
   flex-direction: column; /* Change to column direction to stack elements vertically */
   align-items: center;
   justify-content: center;
-  width: 45%;
+  width: 35%;
   height: 100%;
   background: rgba(255, 252, 252, 0.3);
   backdrop-filter: blur(10px);
@@ -77,8 +77,8 @@
   flex: 1;
 }
 
-.example-card {
-  width: 100%;
+.module-card {
+  width: 350px;
   height: 150px;
   background: #fff;
   border-radius: 10px;
@@ -88,12 +88,12 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.5);
 }
 
-.example-card:hover {
+.module-card:hover {
   transform: translateY(-5px);
   box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.5);
 }
 
-.example-card p {
+.module-card p {
   margin: 0;
   font-size: 18px;
   font-weight: bold;

@@ -4,11 +4,9 @@
   @if (module.checked) {
   <mat-tab label="{{ module.name }}">
     <ng-template matTabContent>
-      @if (module.name === 'Customer Relationship Management') {
-      <app-customer-relationship-management-config></app-customer-relationship-management-config>
-      } @else if (module.name === 'Customer Relationship Management (CRM)') {
+      @if (module.name === 'Customer Relationship Management (CRM)') {
       <app-lead-management-config></app-lead-management-config>
-      } @else if (module.name === 'Travel Management') {
+      } @else {
       <app-travel-management-config></app-travel-management-config>
       }
     </ng-template>

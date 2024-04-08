@@ -9,7 +9,7 @@
   <div class="module-cards">
     <div class="column">
       <ng-container *ngFor="let module of modules.slice(0, 2); let i = index">
-        <mat-card class="example-card" (click)="getStarted()">
+        <mat-card class="module-card" (click)="selectModule(module)">
           <mat-card-content>
             <p>{{ module.name }}</p>
           </mat-card-content>
@@ -18,7 +18,7 @@
     </div>
     <div class="column">
       <ng-container *ngFor="let module of modules.slice(2); let i = index">
-        <mat-card class="example-card" (click)="getStarted()">
+        <mat-card class="module-card" (click)="selectModule(module)">
           <mat-card-content>
             <p>{{ module.name }}</p>
           </mat-card-content>
