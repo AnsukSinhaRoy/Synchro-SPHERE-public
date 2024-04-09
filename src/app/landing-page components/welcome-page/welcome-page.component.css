@@ -1,22 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
 #main {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), url('./BG2.jpg');
   background-size: cover;
   background-position: center;
-  position: relative;
   display: flex;
 }
 
-.container {
+.leftSide {
   display: flex;
   flex-direction: column; /* Change to column direction to stack elements vertically */
   align-items: center;
@@ -26,14 +19,22 @@
   background: rgba(255, 252, 252, 0.3);
   backdrop-filter: blur(10px);
 }
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+}
 
-.container h3,
-.container h1,
-.container p {
+.leftSide h3,
+.leftSide h1,
+.leftSide p,
+.rightSide h1 {
   color: #fff;
 }
 
-.container h1 {
+.leftSide h1 {
   font-weight: 400;
   font-family: 'Bebas Neue', sans-serif;
   font-style: italic;
@@ -41,81 +42,72 @@
   margin-top: 0;
   line-height: 1;
 }
+.rightSide h1
+{
+  font-weight: 300;
+  font-family: 'Bebas Neue', sans-serif;
+  font-style: italic;
+  font-size: 40px;
+  margin-top: 0;
+  line-height: 1;
+}
 
-.container h3{
+.leftSide h3{
   font-size: 30px;
 }
 
-
-.info {
-  width: 50%;
+.cardContainer-card {
+  border-radius: 32px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  width: auto;
+  height:auto;
+  background: #4d4d4d;
+  overflow: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px;
+  /*flex-direction: row;
+  overflow-x: auto;*/
 }
-
-.info-heading {
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
+.show-selected-cards-component {
+  max-height: 100vh; /* Adjust this value as needed */
+  overflow-y: auto;
 }
-
-.module-cards {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1;
-}
-
-.module-card {
-  width: 350px;
-  height: 150px;
-  background: #fff;
-  border-radius: 10px;
+.welcome-message
+{
+  font-weight: 400;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 60px;
+  margin-top: 0;
+  line-height: 1.5;
   padding: 20px;
-  cursor: pointer;
+}
+.signup-button {
+  padding: 30px 35px;
+  margin-top: -16px;
+  border-radius: 15px;
   transition: all 0.3s ease;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.5);
 }
-
-.module-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.5);
+.signup-button:hover {
+  transform: scale3d(1.05, 1.05, 1);
+  box-shadow:  0px 0px 12px rgba(255, 255, 255, 0.5);
 }
-
-.module-card p {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
-
-.config-instruction {
-  color: white;
-  font-size: 15px;
-  font-style: italic;
-}
-
-
-.button1{
-   display: flex;
-   flex-direction: column;
-   align-items: flex-end;
-   padding-bottom: 50px;
-}
-.get-started-button {
   
-  background-color: #3f51b5;
-  color: #fff;
+  /* This will affect all scrollable elements in your application */
+  ::-webkit-scrollbar {
+    width: 10px; /* Adjust width of scrollbar */
+    
+  }
   
-}
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Color of the track */
+    
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scroll thumb */
+    
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3; /* Color of the scroll thumb on hover */
+  }

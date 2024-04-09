@@ -7,11 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ShowSelectedCardsComponent } from '../../shared/show-selected-cards/show-selected-cards.component';
 
 @Component({
   selector: 'app-welcome-page',
   standalone: true,
-  imports: [NgFor, MatListModule, MatButtonModule, MatCardModule, NgIf, MatGridListModule ],
+  imports: [NgFor,ShowSelectedCardsComponent, MatListModule, MatButtonModule, MatCardModule, NgIf, MatGridListModule ],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.css'
 })
@@ -35,20 +36,6 @@ export class WelcomePageComponent {
   getStarted(){
     console.log("Get Started is clicked")
     this.router.navigate(['/configure']);
-  }
-
-  current = 0;
-
-  next() {
-    if (this.current < this.modules.length - 1) {
-      this.current++;
-    }
-  }
-
-  prev() {
-    if (this.current > 0) {
-      this.current--;
-    }
   }
 }
 

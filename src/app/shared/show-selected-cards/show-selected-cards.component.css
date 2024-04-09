@@ -1,0 +1,23 @@
+mat-card {
+    width: 500px;
+    height:300px;
+    margin: 20px;
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    flex: 0 0 auto;
+    cursor: default;
+    transition: all 0.3s ease;
+  }
+  
+  mat-card-content {
+    padding: 20px;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 24px;
+    
+  }
+  mat-card:hover {
+    cursor: pointer;
+    transform: scale3d(1.05, 1.05, 1);
+}

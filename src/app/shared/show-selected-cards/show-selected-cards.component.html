@@ -1,0 +1,12 @@
+<div style="height: auto; max-height: 750px; width: 570px;padding: 20px;">
+  <ng-container *ngFor="let module of modules; let i = index" >
+    <mat-card class="module-card" (click)="selectModule(module)">
+      <mat-card-header>
+        <p style="font-size: 26px;line-height: 1.05;"> <b>{{ module.name }}</b></p>
+      </mat-card-header>
+      <mat-card-content>
+        <p> {{ module.description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+  </div>
