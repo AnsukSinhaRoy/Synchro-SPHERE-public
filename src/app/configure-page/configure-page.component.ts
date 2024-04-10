@@ -21,19 +21,17 @@ export class ConfigurePageComponent {
   
   constructor(private dataService: LandingPageDataService, private router: Router) {
     this.modules = this.dataService.getModules();
+    //this.modules = this.dataService.getModules().filter(module => module.checked === true);
     this.selectedModuleName = this.dataService.getSelectedModule();
     
     if (this.modules.length === 0) {
       this.router.navigate(['']);
     } else {
-      // Set selectedIndex to the index of the module with the selectedModuleName
       const selectedModuleIndex = this.modules.findIndex(module => module.name === this.selectedModuleName);
       
       if (selectedModuleIndex !== -1) {
-        // If a module with the selectedModuleName exists, select it
         this.selectedIndex = selectedModuleIndex;
       } else {
-        // Otherwise, select the first checked module
         const checkedModuleIndex = this.modules.findIndex(module => module.checked);
         
         if (checkedModuleIndex !== -1) {
