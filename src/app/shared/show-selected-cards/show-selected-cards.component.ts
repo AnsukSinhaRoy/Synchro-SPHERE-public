@@ -4,11 +4,13 @@ import { ERPModule } from '../../Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
   selector: 'app-show-selected-cards',
   standalone: true,
-  imports: [MatCardModule, NgFor],
+  imports: [MatCardModule, NgFor, MatButtonModule, MatButton, MatRipple],
   templateUrl: './show-selected-cards.component.html',
   styleUrl: './show-selected-cards.component.css'
 })
