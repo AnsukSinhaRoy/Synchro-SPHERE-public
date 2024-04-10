@@ -1,6 +1,6 @@
 mat-card {
     width: 500px;
-    height:300px;
+    height:280px;
     margin: 20px;
     background-color: #f5f5f5;
     border-radius: 16px;
@@ -14,8 +14,6 @@ mat-card {
     padding: 20px;
     font-size: 16px;
     color: #333;
-    margin-bottom: 24px;
-    
   }
   mat-card:hover {
     cursor: pointer;

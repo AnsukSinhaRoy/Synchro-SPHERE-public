@@ -181,7 +181,6 @@ export class LeadManagementConfigComponent {
       this.changeDetectorRefs.detectChanges();
       this.table.renderRows();
     } else {
-      console.log("NO ROLE IS SELECTED");
     }
   }
   set selectedRole(value: string) {
@@ -213,7 +212,6 @@ export class LeadManagementConfigComponent {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       if (result) {
         this.addEmployee(result);
       }
@@ -231,11 +229,7 @@ export class LeadManagementConfigComponent {
     this.dataSource = new MatTableDataSource(this.employees);
   }
   setRoles(){
-    console.log(this.roles)
-    console.log("SETROLES")
     this._roleserv.roles=this.roles;
-    console.log(this.roles)
-    console.log(this.employees);
   }
   
   //ENTER EMPLOYEES

@@ -13,8 +13,6 @@ export class RolesService {
 
 
   setRoles(): Roles[] {
-    console.log("ROLES SERVICE SAYS")
-    console.log(this.roles)
     return this.roles;
   }
 }

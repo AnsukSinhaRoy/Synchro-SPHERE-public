@@ -6,7 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ERPModule } from './erpmodule.interface';
+import { ERPModule } from '../Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-organization/dialog-register-organization.component';
@@ -62,12 +62,6 @@ export class LandingPageComponent {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          console.log(result);
-          this.landingPageData = {
-            modules: this.modules,
-            result: result
-          };
-          this._LandingPagedataservice.setLandingPageData(this.landingPageData);
           this._LandingPagedataservice.setOrganizationName(result.organizationName);
           this.router.navigate(['/welcome']);
         }

@@ -36,7 +36,6 @@ export class AddRolesComponent {
     }
     this.changeDetectorRefs.detectChanges();
     event.chipInput!.clear();
-    this.service()
   }
 
   remove(roles: Roles): void {
@@ -47,10 +46,5 @@ export class AddRolesComponent {
       this.announcer.announce(`Removed ${roles.name}`);
       this.changeDetectorRefs.detectChanges();
     }
-    this.service()
-  }
-  service()
-  {
-    console.log(this.roles);
   }
 }

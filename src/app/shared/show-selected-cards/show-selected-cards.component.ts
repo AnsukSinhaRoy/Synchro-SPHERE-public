@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ERPModule } from '../../landing-page/erpmodule.interface';
+import { ERPModule } from '../../Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
@@ -16,16 +16,16 @@ export class ShowSelectedCardsComponent {
   organizationName: string = '';
   modules: ERPModule[] = [];
 
-  constructor(private dataService: LandingPageDataService, private router: Router) {
-    this.organizationName = this.dataService.getOrganizationName();
-    this.modules = this.dataService.getModules().filter(module => module.checked);
-    console.log(this.modules)
+  constructor(private _landingpagedataService: LandingPageDataService, private router: Router) {
+    this.organizationName = this._landingpagedataService.getOrganizationName();
+    this.modules = this._landingpagedataService.getModules().filter(module => module.checked);
     if (this.modules.length === 0) {
       this.router.navigate(['']);
     }
   }
 
   selectModule(module: ERPModule){
-    console.log("Module selected: " + module.name)
+    this._landingpagedataService.setSelectedModule(module.name);
+    this.router.navigate(['/configure']);
   }
 }

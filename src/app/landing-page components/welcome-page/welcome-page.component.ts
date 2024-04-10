@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LandingPageDataService } from '../../services/landing-page-data.service';
-import { ERPModule } from '../../landing-page/erpmodule.interface';
+import { ERPModule } from '../../Interfaces/erpmodule.interface';
 import { NgFor, NgIf } from '@angular/common';
 import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,18 +23,12 @@ export class WelcomePageComponent {
   constructor(private dataService: LandingPageDataService, private router: Router) {
     this.organizationName = this.dataService.getOrganizationName();
     this.modules = this.dataService.getModules().filter(module => module.checked);
-    console.log(this.modules)
     if (this.modules.length === 0) {
       this.router.navigate(['']);
     }
   }
 
-  selectModule(module: ERPModule){
-    console.log("Module selected: " + module.name)
-  }
-
   getStarted(){
-    console.log("Get Started is clicked")
     this.router.navigate(['/configure']);
   }
 }
