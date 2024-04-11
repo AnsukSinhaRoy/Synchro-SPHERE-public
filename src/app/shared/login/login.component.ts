@@ -20,6 +20,7 @@ export class LoginComponent {
   loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
+    rememberMe: [false]
   });
 
   password: string = '';
@@ -28,7 +29,6 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
   onSubmit(): void {
-    console.log('Is form valid?', this.loginForm.valid);
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
     }
