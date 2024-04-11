@@ -11,6 +11,7 @@ import { LandingPageDataService } from '../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-organization/dialog-register-organization.component';
 import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../shared/login/login.component';
 
 
 @Component({
@@ -67,5 +68,17 @@ export class LandingPageComponent {
         }
       });
     }
+  }
+  login()
+  {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width:"400px",
+      data: { email: '',  password: '' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        
+      }
+    });
   }
 }

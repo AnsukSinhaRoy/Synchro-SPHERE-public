@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
+import { Component } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
 import { LeadManagementConfigComponent } from '../configure-page components/lead-management-config/lead-management-config.component';
 import { CustomerRelationshipManagementConfigComponent } from '../configure-page components/customer-relationship-management-config/customer-relationship-management-config.component';
 import { TravelManagementConfigComponent } from '../configure-page components/travel-management-config/travel-management-config.component';
@@ -24,7 +24,7 @@ export class ConfigurePageComponent {
     //this.modules = this.dataService.getModules().filter(module => module.checked === true);
     this.selectedModuleName = this.dataService.getSelectedModule();
     
-    if (this.modules.length === 0) {
+    if (this.modules.filter(module => module.checked === true).length /*to know how many modules have been chosen*/  === 0) {
       this.router.navigate(['']);
     } else {
       const selectedModuleIndex = this.modules.findIndex(module => module.name === this.selectedModuleName);

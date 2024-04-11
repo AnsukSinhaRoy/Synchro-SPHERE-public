@@ -1,0 +1,85 @@
+.my-form {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+  }
+  
+  .my-card {
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 2rem;
+  }
+  
+  .login-button {
+    width: 50%;
+    margin-top: 1.5rem;
+  }
+  
+  .checkboxandforgotpass {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .or-container {
+    display: flex;
+    align-items: center;
+    color: #ccc;
+    margin: 1.5rem 0;
+  }
+  
+  .line-separator {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+  }
+  
+  .or-label {
+    margin: 0 1rem;
+    text-align: center;
+  }
+  
+  .google-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 4px 2px #ddd;
+    margin-top: 1.5rem;
+    white-space: nowrap;
+  }
+  
+  
+  
+  .google-logo {
+    width: 20px;
+    height: auto;
+    margin-right: 0.5rem;
+  }
+
+  .login-button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  

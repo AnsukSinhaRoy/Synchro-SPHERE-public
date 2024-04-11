@@ -5,6 +5,7 @@ import { AddRolesComponent } from './shared/add-roles/add-roles.component';
 import { WelcomePageComponent } from './landing-page components/welcome-page/welcome-page.component';
 import { NgModule } from '@angular/core';
 import { ShowSelectedCardsComponent } from './shared/show-selected-cards/show-selected-cards.component';
+import { LoginComponent } from './shared/login/login.component';
 
 export const routes: Routes = [
     {path:'configure',component:ConfigurePageComponent},
@@ -12,7 +13,7 @@ export const routes: Routes = [
     {path:'', component:LandingPageComponent},
     {path:'landing', component:LandingPageComponent},
     {path:'welcome', component:WelcomePageComponent},
-    {path:'try', component:ShowSelectedCardsComponent}
+    {path:'try', component:LoginComponent}
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

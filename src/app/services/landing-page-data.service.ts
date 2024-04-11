@@ -16,7 +16,7 @@ export class LandingPageDataService {
   ];
   SelectedModule: string = '';
   constructor() {}
- //get methods
+ //-------------------------------------------set methods----------------------------------------------------------------------
   setOrganizationName(name: string) {
     this.organizationName = name;
   }
@@ -24,12 +24,11 @@ export class LandingPageDataService {
   setModules(modules: ERPModule[]) {
     this.modules = modules;
   }
-  setSelectedModule(name: string)
-  {
+  setSelectedModule(name: string){
     this.SelectedModule=name;
   }
 
-  //set methods
+  //-------------------------------------------get methods----------------------------------------------------------------------
   getOrganizationName() {
     return this.organizationName;
   }
@@ -38,8 +37,7 @@ export class LandingPageDataService {
     return this.modules;
   }
 
-  getSelectedModule()
-  {
+  getSelectedModule() {
     return this.SelectedModule;
   }
 }

@@ -1,0 +1,62 @@
+<div class="login-container">
+    <div>
+        <mat-card class="my-card">
+            <mat-card-header>
+                <mat-card-title>Sign In</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="my-form">
+                    <mat-form-field class="full-width">
+                      <mat-label>Email</mat-label>
+                      <input type="email" matInput formControlName="email">
+                      <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <mat-label>Password</mat-label>
+                      <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password">
+                      <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                        <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <div class="checkboxandforgotpass">
+                        <div>
+                            <mat-slide-toggle color="primary">Remember Me</mat-slide-toggle>
+                        </div>
+                        <div>
+                            <a routerLink="/forgotpassword">Forgot password</a>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button color="primary" class="login-button">
+                        Sign in
+                    </button>
+                </form>
+
+                <div class="or-container">
+                    <div class="line-separator"></div>
+                    <div class="or-label">OR</div>
+                    <div class="line-separator"></div>
+                </div>
+                <div style="display: flex;
+                align-items: center;
+                justify-content: center;">
+                    <button mat-raised-button>
+                        <div style="display: flex;
+                            justify-content: space-between;
+                            align-items: center;">
+                            <div>
+                                <img class="google-logo" src="https://img.icons8.com/color/28/000000/google-logo.png"
+                                    alt="Google Logo">
+                            </div>
+                            <div>
+                                Login using GOOGLE
+                            </div>
+                        </div>
+
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</div>
