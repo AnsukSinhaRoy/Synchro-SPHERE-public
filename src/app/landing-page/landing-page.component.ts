@@ -6,12 +6,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ERPModule } from '../Interfaces/erpmodule.interface';
+import { ERPModule } from '../services/Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-organization/dialog-register-organization.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../shared/login/login.component';
+import { OrganizationSignupDetails } from '../services/Interfaces/OrganizationDetails.interface';
 
 
 @Component({
@@ -22,7 +23,6 @@ import { LoginComponent } from '../shared/login/login.component';
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
-  landingPageData: any = {};
   organizationName: string = '';
   constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router
   ) {
@@ -54,7 +54,6 @@ export class LandingPageComponent {
     } 
     else 
     {
-      //this._dataservice.setOrganizationName(this.organizationName);
       //this.router.navigate(['/welcome']);
       this._LandingPagedataservice.setModules(this.modules);
       const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
@@ -63,7 +62,8 @@ export class LandingPageComponent {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this._LandingPagedataservice.setOrganizationName(result.organizationName);
+          
+          this._LandingPagedataservice.setOrganizationDetails(result);
           this.router.navigate(['/welcome']);
         }
       });

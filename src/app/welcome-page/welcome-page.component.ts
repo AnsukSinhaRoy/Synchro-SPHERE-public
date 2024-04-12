@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { LandingPageDataService } from '../../services/landing-page-data.service';
-import { ERPModule } from '../../Interfaces/erpmodule.interface';
+import { LandingPageDataService } from '../services/landing-page-data.service';
+import { ERPModule } from '../services/Interfaces/erpmodule.interface';
 import { NgFor, NgIf } from '@angular/common';
 import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { ShowSelectedCardsComponent } from '../../shared/show-selected-cards/show-selected-cards.component';
+import { ShowSelectedCardsComponent } from '../shared/show-selected-cards/show-selected-cards.component';
 
 @Component({
   selector: 'app-welcome-page',

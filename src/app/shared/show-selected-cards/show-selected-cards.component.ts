@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ERPModule } from '../../Interfaces/erpmodule.interface';
+import { ERPModule } from '../../services/Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
