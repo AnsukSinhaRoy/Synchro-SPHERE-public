@@ -29,11 +29,14 @@ export class WelcomePageComponent {
         this.router.navigate(['']);
       }
       else{/* login process */
+          console.log("welcome component org name: ",this._logindataservice.getOrganizationName())
           this.organizationName = this._logindataservice.getOrganizationName();
       }
     }
     else{ /* as superadmin */
-      this.organizationName = this.dataService.getOrganizationName();
+      if(!this.organizationName) 
+        {this.organizationName = this.dataService.getOrganizationName();
+        }
     }
   }
 }

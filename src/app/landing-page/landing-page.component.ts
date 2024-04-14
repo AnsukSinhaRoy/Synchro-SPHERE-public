@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
 import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-organization/dialog-register-organization.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../shared/login/login.component';
-import { OrganizationSignupDetails } from '../services/Interfaces/OrganizationDetails.interface';
-import { LoginPageDataService } from '../services/login-page-data.service';
 
 
 @Component({
@@ -42,7 +40,13 @@ export class LandingPageComponent {
 
   setAll(checked: boolean) {
     this.allComplete = checked;
-    this.modules.forEach(module => (module.checked = checked));
+    this.modules.forEach(module => {
+      module.checked = checked;
+      if (checked) {
+        module.available = true;
+        module.clickable = true;
+      }
+    });
   }
   confirm() {
     if (this.modules.every(module => !module.checked)) {

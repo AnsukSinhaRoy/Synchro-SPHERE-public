@@ -19,28 +19,26 @@ export class ShowSelectedCardsComponent {
   organizationName: string = '';
   modules: ERPModule[] = [];
 
-  constructor(private _landingpagedataService: LandingPageDataService,private _logindataservice: LoginPageDataService, private router: Router) {
-    this.organizationName = this._landingpagedataService.getOrganizationName();
-    this.modules = this._landingpagedataService.getModules().filter(module => module.checked);
+  constructor(private _LandingPagedataservice: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
+    this.organizationName = this._LandingPagedataservice.getOrganizationName();
+    this.modules = this._LandingPagedataservice.getModules().filter(module => module.checked && module.available);
+
     if (this.modules.length === 0) {
       if (!this._logindataservice.getUserData()) {
         this.router.navigate(['']);
       }
-      else{
-        if (this._logindataservice.getUserData()) {
-          
-          this.organizationName = this._logindataservice.userData.organizationName;
-          console.log('org name from userData',this.organizationName)
-        } else {
-          console.log('userData is not defined');
-        }
-        
+      else { /*login workflow */
+      //this.modules = this._logindataservice.getAccessibleModulesToOrg().filter(module => module.checked);
+      console.log("else is executed in show - selected - cards")
       }
     }
   }
 
   selectModule(module: ERPModule){
-    this._landingpagedataService.setSelectedModule(module.name);
+    if (!module.clickable) {
+      return;
+    }
+    this._LandingPagedataservice.setSelectedModule(module.name);
     this.router.navigate(['/configure']);
   }
 }

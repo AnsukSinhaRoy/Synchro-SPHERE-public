@@ -19,3 +19,7 @@ mat-card {
     cursor: pointer;
     transform: scale3d(1.05, 1.05, 1);
 }
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

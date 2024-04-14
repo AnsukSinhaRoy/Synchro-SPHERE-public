@@ -16,30 +16,37 @@ import { LoginPageDataService } from '../services/login-page-data.service';
 })
 
 export class ConfigurePageComponent {
-  modules: ERPModule[] = [];
+  modulesInThisPage: ERPModule[] = [];
   selectedIndex = 0;
   selectedModuleName: string;
 
   constructor(private _landingdataService: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
-    this.modules = this._landingdataService.getModules();
+    this.modulesInThisPage = this._landingdataService.getModules();
     //this.modules = this.dataService.getModules().filter(module => module.checked === true);
     this.selectedModuleName = this._landingdataService.getSelectedModule();
 
-    if (this.modules.filter(module => module.checked === true).length === 0 /*to know how many modules have been chosen*/) {
-      this.router.navigate(['']);
-    }
-    else {
-      const selectedModuleIndex = this.modules.findIndex(module => module.name === this.selectedModuleName);
+    if (this.modulesInThisPage.filter(module => module.checked === true).length !== 0 /*to know how many modules have been chosen*/) {
+      if(this._logindataservice.getModules().filter(module => module.available).length !== 0)/* login */
+        {
+          this.modulesInThisPage=this._logindataservice.getModules().filter(module => module.clickable)
+        }
+      else
+      {
+        const selectedModuleIndex = this.modulesInThisPage.findIndex(module => module.name === this.selectedModuleName);
 
       if (selectedModuleIndex !== -1) {
         this.selectedIndex = selectedModuleIndex;
       } else {
-        const checkedModuleIndex = this.modules.findIndex(module => module.checked);
+        const checkedModuleIndex = this.modulesInThisPage.findIndex(module => module.checked);
 
         if (checkedModuleIndex !== -1) {
           this.selectedIndex = checkedModuleIndex;
         }
       }
+      }
+    }
+    else {
+      this.router.navigate(['']);
     }
   }
 }
