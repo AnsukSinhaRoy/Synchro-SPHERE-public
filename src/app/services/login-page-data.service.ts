@@ -13,7 +13,7 @@ export class LoginPageDataService {
   initializeUserData() {
     this.userData = {
       "userId": "user123",
-      "organizationId": "org123",
+      "organizationName": "org123",
       "module_access_to_org": [
         "CRM",
         "Finance",
@@ -37,5 +37,8 @@ export class LoginPageDataService {
   }
   getUserData() {
     return this.userData ? this.userData : '';
+  }
+  getOrganizationName() {
+    return this.userData ? this.userData.organizationName : '';
   }
 }

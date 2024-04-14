@@ -36,7 +36,7 @@ export class LandingPageDataService {
 
   //-------------------------------------------get methods----------------------------------------------------------------------
   getOrganizationName() {
-    return this.organizationDetails ? this.organizationDetails.organizationName : 'Default Organization Name';
+    return this.organizationDetails ? this.organizationDetails.organizationName : '';
   }
 
   getModules() {

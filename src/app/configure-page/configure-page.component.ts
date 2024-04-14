@@ -25,9 +25,7 @@ export class ConfigurePageComponent {
     //this.modules = this.dataService.getModules().filter(module => module.checked === true);
     this.selectedModuleName = this._landingdataService.getSelectedModule();
 
-    if (this.modules.filter(module => module.checked === true).length === 0 /*to know how many modules have been chosen*/||
-      !this._logindataservice.getUserData()) {
-        console.log('configure page if',this._logindataservice.getUserData())
+    if (this.modules.filter(module => module.checked === true).length === 0 /*to know how many modules have been chosen*/) {
       this.router.navigate(['']);
     }
     else {

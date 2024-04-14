@@ -22,21 +22,18 @@ export class WelcomePageComponent {
   modules: ERPModule[] = [];
 
   constructor(private dataService: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
-    this.organizationName = this.dataService.getOrganizationName();
+    
     this.modules = this.dataService.getModules().filter(module => module.checked);
     if (this.modules.length === 0) {
       if (!this._logindataservice.getUserData()) {
-        console.log('WelcomePageComponent page if', this._logindataservice.getUserData())
         this.router.navigate(['']);
       }
-      else {
-        console.log('WelcomePageComponent page if', this._logindataservice.getUserData())
+      else{/* login process */
+          this.organizationName = this._logindataservice.getOrganizationName();
       }
     }
-  }
-
-  getStarted() {
-    this.router.navigate(['/configure']);
+    else{ /* as superadmin */
+      this.organizationName = this.dataService.getOrganizationName();
+    }
   }
 }
-

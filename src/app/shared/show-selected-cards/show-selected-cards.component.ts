@@ -27,7 +27,14 @@ export class ShowSelectedCardsComponent {
         this.router.navigate(['']);
       }
       else{
-        console.log('show-selected-cards page if', this._logindataservice.getUserData())
+        if (this._logindataservice.getUserData()) {
+          
+          this.organizationName = this._logindataservice.userData.organizationName;
+          console.log('org name from userData',this.organizationName)
+        } else {
+          console.log('userData is not defined');
+        }
+        
       }
     }
   }
