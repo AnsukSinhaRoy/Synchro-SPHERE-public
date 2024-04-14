@@ -13,7 +13,6 @@
                 <mat-label>Your Name</mat-label>
                 <input type="text" matInput formControlName="name" placeholder="Contact person name">
                 <mat-icon matSuffix>person</mat-icon>
-                <mat-hint><strong>Name is mandatory</strong></mat-hint>
                 <mat-error *ngIf="form.controls['name'].hasError('required')">
                     First Name is <strong>required</strong>
                 </mat-error>
@@ -28,7 +27,7 @@
                 <mat-label>Your Contact Email</mat-label>
                 <input type="email" matInput formControlName="email" placeholder="myemail@example.com">
                 <mat-icon matSuffix>email</mat-icon>
-                <mat-hint><strong>Activation Link will be sent on this email</strong> </mat-hint>
+                <mat-hint><strong>Activation Link will be sent to this email</strong> </mat-hint>
                 <mat-error *ngIf="form.controls['email'].hasError('email')">
                     Please enter a valid email address
                 </mat-error>
@@ -39,7 +38,6 @@
             <mat-form-field class="email-place">
                 <mat-label>Organization Name</mat-label>
                 <input type="text" matInput formControlName="organizationName" placeholder="Organization Name">
-                <mat-hint><strong>Organization Name is mandatory</strong></mat-hint>
                 <mat-error *ngIf="form.controls['organizationName'].hasError('required')">
                     First Name is <strong>required</strong>
                 </mat-error>
@@ -54,7 +52,6 @@
                 <mat-label>Your contact Mobile Number</mat-label>
                 <input type="tel" matInput formControlName="phoneNumber" placeholder="1234567890">
                 <mat-icon matSuffix>phone</mat-icon>
-                <mat-hint><strong>Mobile Number is mandatory</strong></mat-hint>
                 <mat-error *ngIf="form.controls['phoneNumber'].hasError('required')">
                     Mobile Number is <strong>required</strong>
                 </mat-error>

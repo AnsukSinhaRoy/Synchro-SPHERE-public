@@ -6,6 +6,7 @@ import { TravelManagementConfigComponent } from '../configure-page components/tr
 import { ERPModule } from '../services/Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../services/landing-page-data.service';
 import { Router } from '@angular/router';
+import { LoginPageDataService } from '../services/login-page-data.service';
 @Component({
   selector: 'app-configure-page',
   standalone: true,
@@ -18,22 +19,25 @@ export class ConfigurePageComponent {
   modules: ERPModule[] = [];
   selectedIndex = 0;
   selectedModuleName: string;
-  
-  constructor(private dataService: LandingPageDataService, private router: Router) {
-    this.modules = this.dataService.getModules();
+
+  constructor(private _landingdataService: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
+    this.modules = this._landingdataService.getModules();
     //this.modules = this.dataService.getModules().filter(module => module.checked === true);
-    this.selectedModuleName = this.dataService.getSelectedModule();
-    
-    if (this.modules.filter(module => module.checked === true).length /*to know how many modules have been chosen*/  === 0) {
+    this.selectedModuleName = this._landingdataService.getSelectedModule();
+
+    if (this.modules.filter(module => module.checked === true).length === 0 /*to know how many modules have been chosen*/||
+      !this._logindataservice.getUserData()) {
+        console.log('configure page if',this._logindataservice.getUserData())
       this.router.navigate(['']);
-    } else {
+    }
+    else {
       const selectedModuleIndex = this.modules.findIndex(module => module.name === this.selectedModuleName);
-      
+
       if (selectedModuleIndex !== -1) {
         this.selectedIndex = selectedModuleIndex;
       } else {
         const checkedModuleIndex = this.modules.findIndex(module => module.checked);
-        
+
         if (checkedModuleIndex !== -1) {
           this.selectedIndex = checkedModuleIndex;
         }

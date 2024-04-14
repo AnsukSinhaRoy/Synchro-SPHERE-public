@@ -6,8 +6,6 @@ import { OrganizationSignupDetails } from './Interfaces/OrganizationDetails.inte
   providedIn: 'root'
 })
 export class LandingPageDataService {
-  organizationName: string = 'DEMO ORGANIZATION NAME';
-  
   
   modules: ERPModule[] = [
     { name: 'Customer Relationship Management (CRM)', checked: false, description:'This component interacts with the customers using data analysis to study large amount of information. They target the audience and observe what is beneficial for them. The component gathers customer data from multiple channels. Hence, CRM stores detailed information on overall purchase history, personal info, and even purchasing behavior patterns.' },
@@ -15,15 +13,12 @@ export class LandingPageDataService {
     { name: 'Human Resources (HR)', checked: false, description:'It is a software handling all personal-related tasks for managers and employees. Employees play a very important role in any organization, without them business would not exist. This component is responsible for automated payments to employees, payment of taxes, generating performance reports, attendance tracking, promotions, deciding working hours and holiday hours of the staff.' },
     { name: 'Manufacturing and logistics', checked: false, description:'It as a group of applicants for planning, production, taking orders and delivering the products to the customers. It provides you a view of the demanded and achieved levels which is very important to check whether you are achieving your targets or not. It provides all the stock summary and production plans beneficial for the business.' },
     { name: 'Supply Chain Management (SCM)', checked: false, description:'A supply chain management is a network of facilities that perform the procurement of the materials and transformation of these materials into intermediate and finalized products and distribution of these products to the customers. Planning, Manufacturing, Marketing, Distribution and the purchasing organizations through a supply chain operate independently.' },
-
   ];
-  organizationDetails: OrganizationSignupDetails = {
-    name: '',
-    email: '',
-    phone: '',
-    organizationName: ''
-  };
+
+  private organizationDetails: any;
+
   SelectedModule: string = '';
+
   constructor() {}
  //-------------------------------------------set methods----------------------------------------------------------------------
 
@@ -41,7 +36,7 @@ export class LandingPageDataService {
 
   //-------------------------------------------get methods----------------------------------------------------------------------
   getOrganizationName() {
-    return this.organizationDetails.organizationName;
+    return this.organizationDetails ? this.organizationDetails.organizationName : 'Default Organization Name';
   }
 
   getModules() {

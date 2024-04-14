@@ -10,9 +10,10 @@ import { ERPModule } from '../services/Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-organization/dialog-register-organization.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../shared/login/login.component';
 import { OrganizationSignupDetails } from '../services/Interfaces/OrganizationDetails.interface';
+import { LoginPageDataService } from '../services/login-page-data.service';
 
 
 @Component({
@@ -24,8 +25,7 @@ import { OrganizationSignupDetails } from '../services/Interfaces/OrganizationDe
 })
 export class LandingPageComponent {
   organizationName: string = '';
-  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router
-  ) {
+  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router) {
     // ...
   }
   modules: ERPModule[] = this._LandingPagedataservice.getModules();
@@ -77,7 +77,7 @@ export class LandingPageComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        
+        this.router.navigate(['/welcome']);
       }
     });
   }

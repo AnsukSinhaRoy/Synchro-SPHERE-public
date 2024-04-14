@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
+import { LoginPageDataService } from '../../services/login-page-data.service';
 
 @Component({
   selector: 'app-show-selected-cards',
@@ -18,11 +19,16 @@ export class ShowSelectedCardsComponent {
   organizationName: string = '';
   modules: ERPModule[] = [];
 
-  constructor(private _landingpagedataService: LandingPageDataService, private router: Router) {
+  constructor(private _landingpagedataService: LandingPageDataService,private _logindataservice: LoginPageDataService, private router: Router) {
     this.organizationName = this._landingpagedataService.getOrganizationName();
     this.modules = this._landingpagedataService.getModules().filter(module => module.checked);
     if (this.modules.length === 0) {
-      this.router.navigate(['']);
+      if (!this._logindataservice.getUserData()) {
+        this.router.navigate(['']);
+      }
+      else{
+        console.log('show-selected-cards page if', this._logindataservice.getUserData())
+      }
     }
   }
 
