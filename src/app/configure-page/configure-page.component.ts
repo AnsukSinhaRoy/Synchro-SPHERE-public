@@ -29,6 +29,17 @@ export class ConfigurePageComponent {
       if(this._logindataservice.getModules().filter(module => module.available).length !== 0)/* login */
         {
           this.modulesInThisPage=this._logindataservice.getModules().filter(module => module.clickable)
+          const selectedModuleIndex = this.modulesInThisPage.findIndex(module => module.name === this.selectedModuleName);
+
+      if (selectedModuleIndex !== -1) {
+        this.selectedIndex = selectedModuleIndex;
+      } else {
+        const checkedModuleIndex = this.modulesInThisPage.findIndex(module => module.checked);
+
+        if (checkedModuleIndex !== -1) {
+          this.selectedIndex = checkedModuleIndex;
+        }
+      }
         }
       else
       {

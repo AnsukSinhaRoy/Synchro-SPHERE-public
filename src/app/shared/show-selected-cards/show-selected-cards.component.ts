@@ -21,7 +21,7 @@ export class ShowSelectedCardsComponent {
 
   constructor(private _LandingPagedataservice: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
     this.organizationName = this._LandingPagedataservice.getOrganizationName();
-    this.modules = this._LandingPagedataservice.getModules().filter(module => module.checked && module.available);
+    this.modules = this._LandingPagedataservice.getModules().filter(module => module.checked);
 
     if (this.modules.length === 0) {
       if (!this._logindataservice.getUserData()) {
@@ -29,7 +29,8 @@ export class ShowSelectedCardsComponent {
       }
       else { /*login workflow */
       //this.modules = this._logindataservice.getAccessibleModulesToOrg().filter(module => module.checked);
-      console.log("else is executed in show - selected - cards")
+      this.modules = this._logindataservice.getModules().filter(module => module.checked && module.available);
+      console.log('modules in show selected cards - ',this.modules)
       }
     }
   }

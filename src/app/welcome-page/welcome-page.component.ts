@@ -19,24 +19,32 @@ import { LoginPageDataService } from '../services/login-page-data.service';
 })
 export class WelcomePageComponent {
   organizationName: string = '';
+  mode: string = 'dashboard';
   modules: ERPModule[] = [];
 
-  constructor(private dataService: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
-    
+  constructor(
+    private dataService: LandingPageDataService,
+    private _logindataservice: LoginPageDataService,
+    private router: Router
+  ) {
     this.modules = this.dataService.getModules().filter(module => module.checked);
     if (this.modules.length === 0) {
       if (!this._logindataservice.getUserData()) {
         this.router.navigate(['']);
+      } else {
+        this.organizationName = this._logindataservice.getOrganizationName();
       }
-      else{/* login process */
-          console.log("welcome component org name: ",this._logindataservice.getOrganizationName())
-          this.organizationName = this._logindataservice.getOrganizationName();
-      }
+    } else {
+      this.organizationName = this.dataService.getOrganizationName();
     }
-    else{ /* as superadmin */
-      if(!this.organizationName) 
-        {this.organizationName = this.dataService.getOrganizationName();
-        }
-    }
+  }
+
+  canConfigure(): boolean {
+    return this._logindataservice.getconfigurePermission();
+  }
+
+  toggleMode(): void {
+    this.mode = this.mode === 'dashboard' ? 'configure' : 'dashboard';
+    this._logindataservice.setMode(this.mode); // Update mode in data service
   }
 }
