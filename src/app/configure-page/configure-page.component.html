@@ -1,5 +1,5 @@
 <mat-tab-group [selectedIndex]="selectedIndex">
-  @for (module of modulesInThisPage; track module; let idx=$index)
+  @for (module of modules; track module; let idx=$index)
   {
   @if (module.checked) {
   <mat-tab label="{{ module.name }}">
