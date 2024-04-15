@@ -7,10 +7,11 @@ import { ERPModule } from '../services/Interfaces/erpmodule.interface';
 import { LandingPageDataService } from '../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { LoginPageDataService } from '../services/login-page-data.service';
+import { CrmDashboardComponent } from '../Dashboard-page-components/crm-dashboard/crm-dashboard.component';
 @Component({
   selector: 'app-configure-page',
   standalone: true,
-  imports: [MatTabsModule, LeadManagementConfigComponent, CustomerRelationshipManagementConfigComponent, TravelManagementConfigComponent],
+  imports: [MatTabsModule, LeadManagementConfigComponent, CustomerRelationshipManagementConfigComponent, TravelManagementConfigComponent, CrmDashboardComponent],
   templateUrl: './configure-page.component.html',
   styleUrl: './configure-page.component.css'
 })
@@ -20,40 +21,29 @@ export class ConfigurePageComponent {
   selectedIndex = 0;
   selectedModuleName: string;
 
-  constructor(private _landingdataService: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
-    this.modulesInThisPage = this._landingdataService.getModules();
+  constructor(private _landingdataService: LandingPageDataService, public _logindataservice: LoginPageDataService, private router: Router) {
     //this.modules = this.dataService.getModules().filter(module => module.checked === true);
+    this.modulesInThisPage = this._landingdataService.getModules();
+    
     this.selectedModuleName = this._landingdataService.getSelectedModule();
-
-    if (this.modulesInThisPage.filter(module => module.checked === true).length !== 0 /*to know how many modules have been chosen*/) {
-      if(this._logindataservice.getModules().filter(module => module.available).length !== 0)/* login */
-        {
-          this.modulesInThisPage=this._logindataservice.getModules().filter(module => module.clickable)
-          const selectedModuleIndex = this.modulesInThisPage.findIndex(module => module.name === this.selectedModuleName);
-
-      if (selectedModuleIndex !== -1) {
-        this.selectedIndex = selectedModuleIndex;
-      } else {
-        const checkedModuleIndex = this.modulesInThisPage.findIndex(module => module.checked);
-
-        if (checkedModuleIndex !== -1) {
-          this.selectedIndex = checkedModuleIndex;
-        }
-      }
-        }
-      else
-      {
+    
+    if (this.modulesInThisPage.filter(module => module.checked === true).length !== 0 /*to know how many modules have been chosen*/)
+       {
+      
+        
         const selectedModuleIndex = this.modulesInThisPage.findIndex(module => module.name === this.selectedModuleName);
 
-      if (selectedModuleIndex !== -1) {
-        this.selectedIndex = selectedModuleIndex;
-      } else {
-        const checkedModuleIndex = this.modulesInThisPage.findIndex(module => module.checked);
-
-        if (checkedModuleIndex !== -1) {
-          this.selectedIndex = checkedModuleIndex;
-        }
-      }
+        if (selectedModuleIndex !== -1) {
+          // If a module with the selectedModuleName exists, select it
+          this.selectedIndex = selectedModuleIndex;
+        } else {
+          // Otherwise, select the first checked module
+          const checkedModuleIndex = this.modulesInThisPage.findIndex(module => module.clickable);
+  
+          if (checkedModuleIndex !== -1) {
+            this.selectedIndex = checkedModuleIndex;
+          }
+      
       }
     }
     else {

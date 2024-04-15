@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-organization/dialog-register-organization.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../shared/login/login.component';
+import { LoginPageDataService } from '../services/login-page-data.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { LoginComponent } from '../shared/login/login.component';
 })
 export class LandingPageComponent {
   organizationName: string = '';
-  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router) {
+  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router, private _loginpageDataService: LoginPageDataService) {
     // ...
   }
   modules: ERPModule[] = this._LandingPagedataservice.getModules();
@@ -33,7 +34,16 @@ export class LandingPageComponent {
   updateAllComplete() {
     this.allComplete = this.modules.every(module => module.checked);
   }
-
+  updateModuleStatus(module: ERPModule) {
+    if (module.checked) {
+      module.available = true;
+      module.clickable = true;
+    } else {
+      module.available = false;
+      module.clickable = false;
+    }
+    this.updateAllComplete();
+  }
   someComplete(): boolean {
     return this.modules.filter(module => module.checked).length > 0 && !this.allComplete;
   }
@@ -66,7 +76,7 @@ export class LandingPageComponent {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          
+          this._loginpageDataService.mode='configure';
           this._LandingPagedataservice.setOrganizationDetails(result);
           this.router.navigate(['/welcome']);
         }

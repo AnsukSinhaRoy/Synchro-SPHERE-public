@@ -6,9 +6,11 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NgModule } from '@angular/core';
 import { ShowSelectedCardsComponent } from './shared/show-selected-cards/show-selected-cards.component';
 import { LoginComponent } from './shared/login/login.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 
 export const routes: Routes = [
     {path:'configure',component:ConfigurePageComponent},
+    {path:'dashboard',component:DashboardPageComponent},
     /*{path:'', component:WelcomePageComponent},*/
     {path:'', component:LandingPageComponent},
     {path:'landing', component:LandingPageComponent},

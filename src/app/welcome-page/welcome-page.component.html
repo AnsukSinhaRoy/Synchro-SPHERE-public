@@ -1,5 +1,4 @@
-<button *ngIf="canConfigure()" (click)="toggleMode()">Mode: {{ mode }}</button>
-
+<button mat-raised-button color="primary" *ngIf="canConfigure()" (click)="toggleMode()">Mode: {{ mode }}</button>
 <div id="main">
   <div class="leftSide">
     <h3 class="welcome-header">Welcome</h3>

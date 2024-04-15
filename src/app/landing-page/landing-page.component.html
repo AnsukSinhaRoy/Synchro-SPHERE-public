@@ -21,7 +21,7 @@
       <span class="example-list-section">
         <ul class="checkbox-list">
           <li *ngFor="let module of modules" class="checkbox-item">
-            <mat-checkbox [(ngModel)]="module.checked" (ngModelChange)="updateAllComplete()">
+            <mat-checkbox [(ngModel)]="module.checked" (ngModelChange)="updateModuleStatus(module)">
               <span class="mat-checkbox-label">{{ module.name }}</span>
             </mat-checkbox>
           </li>

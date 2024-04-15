@@ -13,13 +13,13 @@ import { LoginPageDataService } from '../services/login-page-data.service';
 @Component({
   selector: 'app-welcome-page',
   standalone: true,
-  imports: [NgFor, ShowSelectedCardsComponent, MatListModule, MatButtonModule, MatCardModule, NgIf, MatGridListModule],
+  imports: [NgFor, ShowSelectedCardsComponent, MatListModule, MatButtonModule, MatCardModule, NgIf, MatGridListModule, MatButtonModule],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.css'
 })
 export class WelcomePageComponent {
   organizationName: string = '';
-  mode: string = 'dashboard';
+  mode: string = this._logindataservice.mode;
   modules: ERPModule[] = [];
 
   constructor(
