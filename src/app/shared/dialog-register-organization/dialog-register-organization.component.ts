@@ -31,7 +31,7 @@ export class DialogRegisterOrganizationComponent {
 
   
   
-  save() {
+  save(): void {
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
     }
