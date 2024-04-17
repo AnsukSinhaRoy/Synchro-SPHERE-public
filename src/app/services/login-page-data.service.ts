@@ -36,7 +36,7 @@ export class LoginPageDataService {
         "name": "admin",
         "permission":
         {
-          "configure": false,
+          "configure": true,
           "create": true,
           "read": true,
           "update": true,
