@@ -20,7 +20,7 @@ export class LoginPageDataService {
   initializeUserData() {
     this.userData = {
       "userId": "user123",
-      "organizationName": "org123",
+      "organizationName": "Org name - login",
       "module_access_to_org":
         [
           "Customer Relationship Management (CRM)",
@@ -30,6 +30,7 @@ export class LoginPageDataService {
       "module_access_to_user":
         [
           "Customer Relationship Management (CRM)",
+          "Human Resources (HR)",
         ],
       "role":
       {
