@@ -3,46 +3,22 @@
 #main {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), url('./BG2.jpg');
+  background-image:url('./BG\ light.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
 }
-
-.leftSide {
-  display: flex;
-  flex-direction: column; /* Change to column direction to stack elements vertically */
-  align-items: center;
-  justify-content: center;
-  width: 35%;
-  height: 100%;
-  background: rgba(255, 252, 252, 0.3);
-  
-}
-.rightSide {
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
-
-.leftSide h3,
-.leftSide h1,
-.leftSide p,
-.rightSide h1 {
-  color: #fff;
+.main h1 {
+  color: #000000;
 }
-
-.leftSide h1 {
-  font-weight: 400;
-  font-family: 'Bebas Neue', sans-serif;
-  font-style: italic;
-  font-size: 60px;
-  margin-top: 0;
-  line-height: 1;
-}
-.rightSide h1
+.main h1
 {
   font-weight: 300;
   font-family: 'Bebas Neue', sans-serif;
@@ -52,26 +28,16 @@
   line-height: 1;
 }
 
-.leftSide h3{
-  font-size: 30px;
-}
-
 .cardContainer-card {
   border-radius: 32px;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
-  width: auto;
-  height:auto;
-  background: #4d4d4d;
+  background: rgba(255, 255, 255, 0.15); /* Make background color semi-transparent */
+  width: 80%;
+  min-width: 360px;
   overflow: auto;
-  display: flex;
-  /*flex-direction: row;
-  overflow-x: auto;*/
+  backdrop-filter: blur(5px); /* Apply blur effect */
 }
-.show-selected-cards-component {
-  max-height: 100vh; /* Adjust this value as needed */
-  overflow-y: auto;
-}
+
 .welcome-message
 {
   font-weight: 400;
@@ -81,41 +47,27 @@
   line-height: 1.5;
   padding: 20px;
 }
-.signup-button {
-  padding: 30px 35px;
-  margin-top: -16px;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-.signup-button:hover {
-  /*transform: scale3d(1.05, 1.05, 1);*/
-  box-shadow:  0px 0px 12px rgba(255, 255, 255, 0.5);
-}
-  
-  /* This will affect all scrollable elements in your application */
   ::-webkit-scrollbar {
-    width: 10px; /* Adjust width of scrollbar */
+    width: 10px;
     
   }
   
   ::-webkit-scrollbar-track {
-    background: transparent; /* Color of the track */
+    background: transparent;
     
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #888; /* Color of the scroll thumb */
-    
+    background: #888;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: #b3b3b3; /* Color of the scroll thumb on hover */
+    background: #b3b3b3;
   }
   button {
-    position: absolute;
-    top: 0;
-    right: 0;
     margin-right: 10px;
     margin-top: 10px;
+    padding: 10px;
+    z-index: 10;
   }
   

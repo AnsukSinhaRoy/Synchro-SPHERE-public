@@ -54,7 +54,8 @@ export class ConfigurePageComponent {
       }
     }
     else {
-      this.router.navigate(['']);
+      this._logindataservice.initializeUserData();
+      //this.router.navigate(['']);
     }
   }
 }

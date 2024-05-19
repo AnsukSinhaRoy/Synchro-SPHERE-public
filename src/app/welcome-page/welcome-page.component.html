@@ -1,7 +1,8 @@
-<button mat-raised-button color="primary" *ngIf="canConfigure()" (click)="toggleMode()">Mode: {{ mode }}</button>
+
 <div id="main">
-  <div class="rightSide">
+  <div class="main">
     <h1 style="margin-top: 24px;">Modules Available:</h1>
+    <button mat-raised-button *ngIf="canConfigure()" (click)="toggleMode()">Mode: {{ mode }}</button>
     <mat-card class="cardContainer-card">
       <app-show-selected-cards></app-show-selected-cards>
     </mat-card>

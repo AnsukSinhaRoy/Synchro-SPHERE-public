@@ -1,18 +1,17 @@
-<div style="height: auto;
-max-height: 750px;
-width: 560px;
-padding: 20px;
-box-sizing: border-box;
-margin-left: auto;
-margin-right: auto;">
-  <ng-container *ngFor="let module of modules; let i = index" >
-    <mat-card class="module-card" [class.disabled]="!module.clickable" matRipple (click)="selectModule(module)">
-      <mat-card-header>
-        <p style="font-size: 26px;line-height: 1.05;"> <b>{{ module.name }}</b></p>
-      </mat-card-header>
-      <mat-card-content>
-        <p> {{ module.description}}</p>
-      </mat-card-content>
-    </mat-card>
-  </ng-container>
+<div class="card-container">
+<ng-container *ngFor="let module of modules; let i = index">
+  <mat-card class="module-card" 
+            [class.disabled]="!module.clickable"
+            matRipple
+            (click)="selectModule(module)"
+            [ngStyle]="{'background-image': hoveredModule === module ? getHoverBackground() : getBackgroundImage(module)}"
+            (mouseenter)="hoveredModule = module"
+            (mouseleave)="hoveredModule = null">
+    <mat-card-header>
+      <p style="font-size: 26px;line-height: 1.05;">
+        <b>{{ module.name }}</b>
+      </p>
+    </mat-card-header>
+  </mat-card>
+</ng-container>
 </div>

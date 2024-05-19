@@ -30,7 +30,8 @@ export class WelcomePageComponent {
     this.modules = this.dataService.getModules().filter(module => module.checked);
     if (this.modules.length === 0) {
       if (!this._logindataservice.getUserData()) {
-        this.router.navigate(['']);
+        this._logindataservice.initializeUserData();
+      //this.router.navigate(['']);
       } else {
         this.organizationName = this._logindataservice.getOrganizationName();
       }
