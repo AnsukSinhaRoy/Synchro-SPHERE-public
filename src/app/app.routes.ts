@@ -15,7 +15,7 @@ export const routes: Routes = [
     {path:'', component:LandingPageComponent},
     {path:'landing', component:LandingPageComponent},
     {path:'welcome', component:WelcomePageComponent},
-    {path:'try', component:LoginComponent}
+    {path:'try', component:ShowSelectedCardsComponent}
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
