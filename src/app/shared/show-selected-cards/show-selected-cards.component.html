@@ -4,10 +4,11 @@
             [class.disabled]="!module.clickable"
             matRipple
             (click)="selectModule(module)"
-            [ngStyle]="{'background-image': hoveredModule === module ? getHoverBackground() : getBackgroundImage(module)}"
+             [ngStyle]="{'background': hoveredModule === module ? getHoverBackground(module) : getBackgroundImage(module)}"
             (mouseenter)="hoveredModule = module"
             (mouseleave)="hoveredModule = null">
     <mat-card-header>
+      
       <p style="font-size: 26px;line-height: 1.05;">
         <b>{{ module.name }}</b>
       </p>

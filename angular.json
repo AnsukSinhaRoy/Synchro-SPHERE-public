@@ -25,7 +25,8 @@
               "src/Logo1.png",
               "src/app/landing-page/4.png",
               "src/app/landing-page-new/4.png",
-              "src/1.png"
+              "src/1.png",
+              "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",

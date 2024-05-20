@@ -3,7 +3,7 @@
 #main {
   width: 100%;
   height: 100%;
-  background-image:url('./BG\ light.jpg');
+  background-image:/*linear-gradient(rgba(255, 255, 255, 0.7), rgb(6, 110, 207)),*/ url('./BG\ light.jpg');
   background-size: cover;
   background-position: center;
   display: flex;

@@ -52,17 +52,14 @@ export class ShowSelectedCardsComponent {
 
   }
   getBackgroundImage(module: ERPModule): string {
-    // Ensure the backgroundImage property is a string that represents the path to the image
-    const imageUrl = `assets/${module.backgroundImage}`;
-    return module.gradient;
+    return `${module.gradient}, url('assets/${module.backgroundImage}') no-repeat center/100%`;
   }
-  getHoverBackground(): string {
-    if (this.hoveredModule) {
-      console.log("hovered" + this.hoveredModule.hoverGradient);
-      return this.hoveredModule.hoverGradient;
+  
+  getHoverBackground(module: ERPModule): string {
+    if (module) {
+      return `${module.hoverGradient}, url('assets/${module.backgroundImage}') no-repeat center/110%`;
     }
     return '';
   }
   
-
 }

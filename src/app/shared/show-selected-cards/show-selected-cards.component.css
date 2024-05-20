@@ -13,23 +13,14 @@ mat-card {
   margin: 20px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; /* Ensure the background image covers the card */
+  background-size: cover;
   border-radius: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   cursor: default;
-  transition: transform 0.3s ease, background-image 0.5s ease-in-out;
+  background: var(--card-background);
+  transition: transform 0.3s ease, background-size 0.5s ease;
   position: relative;
   overflow: hidden;
-}
-@media (max-width: 1400px) {
-  mat-card {
-    flex: 0 1 calc(50% - 40px); /* 2 cards per row */
-  }
-}
-@media (max-width: 900px) {
-  mat-card {
-    flex: 0 1 100%; /* 1 card per row */
-  }
 }
 mat-card::before {
   content: "";
@@ -52,8 +43,19 @@ mat-card:hover::before {
 mat-card:hover {
   cursor: pointer;
   transform: scale3d(1.05, 1.05, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 1400px) {
+  mat-card {
+    flex: 0 1 calc(50% - 40px); /* 2 cards per row */
+  }
+}
+@media (max-width: 900px) {
+  mat-card {
+    flex: 0 1 100%; /* 1 card per row */
+  }
+}
 mat-card-content {
   padding: 20px;
   font-size: 16px;
@@ -65,3 +67,4 @@ mat-card-content {
   opacity: 0.5;
   pointer-events: none;
 }
+
