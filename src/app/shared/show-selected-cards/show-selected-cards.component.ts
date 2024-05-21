@@ -51,12 +51,12 @@ export class ShowSelectedCardsComponent {
 
   }
   getBackgroundImage(module: ERPModule): string {
-    return `${module.gradient}, url('assets/${module.backgroundImage}') no-repeat center/100%`;
+    return `${module.gradient}, url('assets/${module.backgroundImage}') no-repeat center/70%`;
   }
   
   getHoverBackground(module: ERPModule): string {
     if (module) {
-      return `${module.hoverGradient}, url('assets/${module.backgroundImage}') no-repeat center/110%`;
+      return `${module.hoverGradient}, url('assets/${module.backgroundImage}') no-repeat center/90%`;
     }
     return '';
   }

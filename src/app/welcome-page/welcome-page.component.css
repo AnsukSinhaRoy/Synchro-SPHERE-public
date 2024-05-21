@@ -35,6 +35,7 @@
   width: 80%;
   min-width: 360px;
   overflow: auto;
+  margin-bottom: 14px;
   backdrop-filter: blur(5px); /* Apply blur effect */
 }
 
