@@ -27,8 +27,7 @@ export class ShowSelectedCardsComponent {
 
     if (this.modules.length === 0) {
       if (!this._logindataservice.getUserData()) {
-        this._logindataservice.initializeUserData();
-        //this.router.navigate(['']);
+        this.router.navigate(['']);
       }
       else { /*login workflow */
         //this.modules = this._logindataservice.getAccessibleModulesToOrg().filter(module => module.checked);

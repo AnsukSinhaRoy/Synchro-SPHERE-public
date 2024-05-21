@@ -23,13 +23,13 @@ export class LoginPageDataService {
           "Human Resources (HR)",
           "Finance",
           "Supply Chain Management (SCM)",
-          "Manufacturing and logistics"
+          "Manufacturing and logistics",
         ],
       "module_access_to_user":
         [
           "Customer Relationship Management (CRM)",
           "Finance",
-          "Supply Chain Management (SCM)",
+          "Manufacturing and logistics",
         ],
       "role":
       {
