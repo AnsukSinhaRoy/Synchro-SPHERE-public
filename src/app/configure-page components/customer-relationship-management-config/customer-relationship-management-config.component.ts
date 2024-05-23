@@ -142,12 +142,14 @@ export class CustomerRelationshipManagementConfigComponent {
     this._crmdataservice.setRoles(this.roles);
   }
   removeRole(role: string): void {
+    if (this.selectedRole === role) {
+      this.selectedRolePermissions={};
+      this.selectedRole = ''; // or null
+    }
     const index = this.roles.indexOf(role);
-
     if (index >= 0) {
       this.roles.splice(index, 1);
     }
-
     // Update the roles in the service
     this._crmdataservice.setRoles(this.roles);
   }

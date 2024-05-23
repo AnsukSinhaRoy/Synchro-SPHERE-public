@@ -21,7 +21,7 @@ export class ConfigurePageComponent {
 
   constructor(private _landingdataService: LandingPageDataService, public _logindataservice: LoginPageDataService, private router: Router) 
   {
-    //this._logindataservice.initializeUserData();
+    this._logindataservice.initializeUserData();
     //this.modules = this.dataService.getModules().filter(module => module.checked === true);
     this.selectedModuleName = this._landingdataService.getSelectedModule();
     if (this._logindataservice.modules.filter(module => module.available === true).length !== 0) {

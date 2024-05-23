@@ -14,9 +14,10 @@ export class LoginPageDataService {
   mode: string = 'dashboard'
   is_login: boolean=false;
   constructor(private _masterdata: MasterDataService,) { 
-    this.is_login=true;
+    
   }
   initializeUserData() {
+    this.is_login=true;
     this.userData = {
       "userId": "user123",
       "organizationName": "Org name - login",

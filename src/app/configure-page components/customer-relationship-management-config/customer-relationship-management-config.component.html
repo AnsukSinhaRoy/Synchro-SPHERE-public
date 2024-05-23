@@ -1,22 +1,27 @@
 <mat-horizontal-stepper #stepper (selectionChange)="stepperChanged(stepper)">
   <!-- Step 1: Welcome Page -->
   <mat-step>
-    <div style="text-align: center; padding-top: 50px;min-width: 420px;">
+    <div style="text-align: center; padding-top: 50px; min-width: 420px;">
       <h1>Welcome to SynchroSphere!</h1>
       <p style="font-size: 1.2em;">Your journey to streamlined CRM management starts here.</p>
-      <mat-card style="max-width: 600px; margin: 20px auto; padding: 20px;">
-        <img src="../../../assets/Logo1.png" alt="SynchroSphere Logo" style="width: 250px; margin: 20px auto;">
+      <mat-card style="max-width: 600px; margin: 20px auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <img src="../../../assets/Logo1.png" alt="SynchroSphere Logo" style="width: 250px; margin: 20px auto; display: block;">
         <h2>Let's get started with setting up your CRM service</h2>
         <p>Our guided setup will help you configure your CRM in just a few steps.</p>
         <p>Click the button below to begin.</p>
-        <button mat-raised-button color="primary" (click)="stepper.next()">Get Started</button>
+        <div style="text-align: center;">
+          <button mat-raised-button color="primary" (click)="stepper.next()"
+            style="height: 50px; width: 150px; font-size: 1.2em; border-radius: 14px;">Get Started </button>
+        </div>
       </mat-card>
     </div>
   </mat-step>
+  
+  
 
   <!-- Step 2: Select Submodules -->
   <mat-step>
-    <div style="text-align: center; padding: 50px;">
+    <div style="text-align: center; padding: 50px;margin-left: 30px;margin-right: 30px;">
       <h1>Select CRM Modules</h1>
       <p style="font-size: 1.2em;">Choose the modules you want to include in your CRM system.</p>
       <mat-card
@@ -24,11 +29,12 @@
         <h2>Available Modules</h2>
         <p>Select from the following modules to customize your CRM experience:</p>
         <mat-selection-list [(ngModel)]="selectedSubModules" multiple="true"
-          style="flex-grow: 1; overflow: auto; text-align: left;">
+          style="flex-grow: 1; overflow: auto; text-align: left; border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
           <mat-list-option *ngFor="let submodule of submodules" [value]="submodule">
             {{ submodule }}
           </mat-list-option>
         </mat-selection-list>
+
         <p style="margin-top: 20px; font-weight: bold;">Modules selected: {{ selectedSubModules.length }}</p>
       </mat-card>
     </div>
@@ -42,7 +48,7 @@
       <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
         <div style="width: 100%; margin-bottom: 20px;">
           <mat-form-field style="width: 80%; height: 100px; min-width: 600px;">
-            <mat-label style="font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;"><b>Set Roles List for your organization</b></mat-label>
+            <mat-label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px;"><b>Set Roles List for your organization</b></mat-label>
             <mat-chip-grid #chipGrid aria-label="Enter Roles">
               <mat-chip-row *ngFor="let role of roles" (removed)="removeRole(role)" [editable]="true" (edited)="edit(role, $event)">
                 {{role}}
@@ -56,7 +62,7 @@
         </div>
         <div style="display: flex; flex-direction: row; width: 80%; margin-top: 20px; min-width: 600px;">
           <div style="display: flex; flex-direction: row; width: 60%; height: 80px; margin-top: 50px;">
-            <p style="font-family: 'Courier New', Courier, monospace; font-size: 20px; margin-top: 16px; margin-right: 6px;">Select a role here</p>
+            <p style="font-size: 20px; margin-top: 16px; margin-right: 6px;">Select a role here</p>
             <mat-form-field>
               <mat-label style="font-family: 'Arial Narrow', sans-serif;">Select Role</mat-label>
               <mat-select [(value)]="selectedRole" (selectionChange)="updatePermissionsForRole(selectedRole)">
@@ -65,29 +71,53 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <p style="font-family: 'Courier New', Courier, monospace; font-size: 20px; margin-top: 16px; margin-left: 6px;">And set its custom Permissions</p>
+            <p style="font-size: 20px; margin-top: 16px; margin-left: 6px;">And set its custom Permissions</p>
           </div>
-          <div style="margin-top: 10px; width: 40%;">
-            <button mat-raised-button color="primary" (click)="updatePermissions()">Confirm</button>
-            <mat-accordion [ngClass]="{'disabled-accordion': !selectedRole}">
-              <mat-expansion-panel *ngFor="let submodule of selectedSubModules">
-                <mat-expansion-panel-header>{{submodule}}</mat-expansion-panel-header>
-                <div *ngIf="selectedRolePermissions[submodule]">
-                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].create">Create</mat-checkbox>
-                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].read">Read</mat-checkbox>
-                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].update">Update</mat-checkbox>
-                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].delete">Delete</mat-checkbox>
-                </div>
-              </mat-expansion-panel>
-            </mat-accordion>
-          </div>
+          <mat-card style="margin-top: 10px; width: 50%;">
+            <mat-card-content>
+              <mat-accordion [ngClass]="{'disabled-accordion': !selectedRole}">
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+                <button mat-raised-button color="primary" (click)="updatePermissions()" style="width: 120px;">Confirm</button>
+              </div>
+                <mat-expansion-panel *ngFor="let submodule of selectedSubModules">
+                  <mat-expansion-panel-header>
+                    <div style="display: flex; align-items: center; width: 100%;">
+                      <div style="flex-shrink: 0; width: 310px; font-weight: bold; font-size: 18px; text-align: left;">{{submodule}}</div>
+                      <div *ngIf="selectedRolePermissions[submodule]" style="font-size: 14px; flex-grow: 1;">
+                        <span *ngIf="selectedRolePermissions[submodule].create" class="permission-label" style="background-color: #a0ccb1;">Create</span>
+                        <span *ngIf="selectedRolePermissions[submodule].read" class="permission-label" style="background-color: #a4a1d6;">Read</span>
+                        <span *ngIf="selectedRolePermissions[submodule].update" class="permission-label" style="background-color: #fce4b6;">Update</span>
+                        <span *ngIf="selectedRolePermissions[submodule].delete" class="permission-label" style="background-color: #fab6b1;">Delete</span>
+                      </div>
+                      
+                    </div>
+                  </mat-expansion-panel-header>
+                  <div *ngIf="selectedRolePermissions[submodule]">
+                    <ul style="list-style-type: none; padding-left: 0; text-align: left;">
+                      <li>
+                        <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].create">Fancy name for Create Functionality</mat-checkbox>
+                      </li>
+                      <li>
+                        <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].read">Fancy name for Read Functionality</mat-checkbox>
+                      </li>
+                      <li>
+                        <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].update">Fancy name for Update Functionality</mat-checkbox>
+                      </li>
+                      <li>
+                        <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].delete">Fancy name for Delete Functionality</mat-checkbox>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-card-content>
+          </mat-card>
+          
         </div>
       </div>
     </div>
   </mat-step>
-  
-  
-  
+
 
   <!-- Step 4: Final Step -->
   <mat-step>
@@ -99,10 +129,10 @@
 
 <!-- Navigation Buttons -->
 <div style="z-index: 10; position: fixed; bottom: 0; left: 0; padding: 20px;">
-  <button mat-raised-button *ngIf="stepper.selectedIndex !== 0" (click)="stepper.previous()">Previous</button>
+  <button mat-raised-button style="height: 80vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex !== 0" (click)="stepper.previous()">Previous</button>
 </div>
 <div style="z-index: 10; position: fixed; bottom: 0; right: 0; padding: 20px;">
-  <button mat-raised-button *ngIf="stepper.selectedIndex !== 0" (click)="stepper.next()">Next</button>
-  <button mat-raised-button *ngIf="stepper.selectedIndex === stepper.steps.length - 1"
+  <button mat-raised-button style="height: 80vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex !== 0 && stepper.selectedIndex !== stepper._steps.length - 1" (click)="stepper.next()">Next</button>
+  <button mat-raised-button style="height: 80vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex === stepper.steps.length - 1"
     (click)="stepper.reset()">Finish</button>
 </div>
