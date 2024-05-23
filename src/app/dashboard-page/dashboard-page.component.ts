@@ -18,7 +18,7 @@ export class DashboardPageComponent {
   selectedIndex = 0;
   selectedModuleName: string;
   constructor(private _landingdataService: LandingPageDataService, public _logindataservice: LoginPageDataService) {
-
+    
     this.selectedModuleName = this._landingdataService.getSelectedModule();
     this.modulesInThisPage = this._logindataservice.getModules().filter(module => module.clickable)
     const selectedModuleIndex = this.modulesInThisPage.findIndex(module => module.name === this.selectedModuleName);

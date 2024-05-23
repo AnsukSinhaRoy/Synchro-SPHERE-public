@@ -1,158 +1,108 @@
-<mat-stepper #stepper>
-    <mat-step>
-      <div>
-        <h1>Mention the Roles Present in Your Company</h1>
-        <mat-form-field>
-          <mat-label>Mention Roles</mat-label>
-          <br>
-          <mat-chip-grid #chipGrid aria-label="Enter Roles">
-            @for (role of roles; track role) {
-            <mat-chip-row (removed)="remove(role)" [editable]="true" (edited)="edit(role, $event)"
-              [aria-description]="'press enter to edit ' + role.name">
-              {{role.name}}
-              <button matChipRemove [attr.aria-label]="'remove' + role.name">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
-            }
-            <input placeholder="New Role..." [matChipInputFor]="chipGrid"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="add($event)" />
-          </mat-chip-grid>
-        </mat-form-field>
-        <br>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <h1>Assign Functions to the Mentioned Roles</h1>
-      <div style="display: flex; gap: 10px">
-        <mat-form-field>
-          <mat-label>Select</mat-label>
-          <mat-select [(value)]="selectedRole">
-            <ng-container *ngFor="let role of roles">
-              <mat-option [value]="role.name">{{role.name}}</mat-option>
-            </ng-container>
-          </mat-select>
-        </mat-form-field>
-        <mat-chip-listbox [disabled]=disableChips aria-label="Function selection" multiple
-          [(ngModel)]="selectedFunctions">
-          <mat-chip-option>CREATE</mat-chip-option>
-          <mat-chip-option>READ</mat-chip-option>
-          <mat-chip-option>UPDATE</mat-chip-option>
-          <mat-chip-option>DELETE</mat-chip-option>
-        </mat-chip-listbox>
-  
-        <button mat-raised-button [disabled]=disableChips color="primary" (click)="confirm()">Confirm</button>
-      </div>
-      <div style="width: 450px; margin-top: 100px;">
-        <mat-table [dataSource]="permissions" class="mat-elevation-z8">
-          <!-- Role Column -->
-          <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef> Role </th>
-            <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-          </ng-container>
-  
-          <!-- Create Column -->
-          <ng-container matColumnDef="create">
-            <th mat-header-cell *matHeaderCellDef> Create </th>
-            <td mat-cell *matCellDef="let element">
-              <div style="display: flex; align-items: center;">
-                <mat-icon *ngIf="element.functions.includes('CREATE')" style="line-height: 1;">check</mat-icon>
-                <span *ngIf="!element.functions.includes('CREATE')">NO</span>
-              </div>
-            </td>
-          </ng-container>
-  
-          <!-- Read Column -->
-          <ng-container matColumnDef="read">
-            <th mat-header-cell *matHeaderCellDef> Read </th>
-            <td mat-cell *matCellDef="let element">
-              <div style="display: flex; align-items: center;">
-                <mat-icon *ngIf="element.functions.includes('READ')" style="line-height: 1;">check</mat-icon>
-                <span *ngIf="!element.functions.includes('READ')">NO</span>
-              </div>
-            </td>
-          </ng-container>
-  
-          <!-- Update Column -->
-          <ng-container matColumnDef="update">
-            <th mat-header-cell *matHeaderCellDef> Update </th>
-            <td mat-cell *matCellDef="let element">
-              <div style="display: flex; align-items: center;">
-                <mat-icon *ngIf="element.functions.includes('UPDATE')" style="line-height: 1;">check</mat-icon>
-                <span *ngIf="!element.functions.includes('UPDATE')">NO</span>
-              </div>
-            </td>
-          </ng-container>
-  
-          <!-- Delete Column -->
-          <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef> Delete </th>
-            <td mat-cell *matCellDef="let element">
-              <div style="display: flex; align-items: center;">
-                <mat-icon *ngIf="element.functions.includes('DELETE')" style="line-height: 1;">check</mat-icon>
-                <span *ngIf="!element.functions.includes('DELETE')">NO</span>
-              </div>
-            </td>
-          </ng-container>
-  
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </mat-table>
-      </div>
-      <div>
-        <br>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <div style="display: flex; flex-direction: column;">
-      <div style="align-self: flex-end;">
-          <button mat-raised-button class="new-employee" (click)="openDialog()" (click)="setRoles()">+ NEW</button>
+<mat-horizontal-stepper #stepper (selectionChange)="stepperChanged(stepper)">
+  <!-- Step 1: Welcome Page -->
+  <mat-step>
+    <div style="text-align: center; padding-top: 50px;min-width: 420px;">
+      <h1>Welcome to SynchroSphere!</h1>
+      <p style="font-size: 1.2em;">Your journey to streamlined CRM management starts here.</p>
+      <mat-card style="max-width: 600px; margin: 20px auto; padding: 20px;">
+        <img src="../../../assets/Logo1.png" alt="SynchroSphere Logo" style="width: 250px; margin: 20px auto;">
+        <h2>Let's get started with setting up your CRM service</h2>
+        <p>Our guided setup will help you configure your CRM in just a few steps.</p>
+        <p>Click the button below to begin.</p>
+        <button mat-raised-button color="primary" (click)="stepper.next()">Get Started</button>
+      </mat-card>
+    </div>
+  </mat-step>
+
+  <!-- Step 2: Select Submodules -->
+  <mat-step>
+    <div style="text-align: center; padding: 50px;">
+      <h1>Select CRM Modules</h1>
+      <p style="font-size: 1.2em;">Choose the modules you want to include in your CRM system.</p>
+      <mat-card
+        style="max-width: 800px; margin: 20px auto; padding: 20px; height: 500px; display: flex; flex-direction: column;">
+        <h2>Available Modules</h2>
+        <p>Select from the following modules to customize your CRM experience:</p>
+        <mat-selection-list [(ngModel)]="selectedSubModules" multiple="true"
+          style="flex-grow: 1; overflow: auto; text-align: left;">
+          <mat-list-option *ngFor="let submodule of submodules" [value]="submodule">
+            {{ submodule }}
+          </mat-list-option>
+        </mat-selection-list>
+        <p style="margin-top: 20px; font-weight: bold;">Modules selected: {{ selectedSubModules.length }}</p>
+      </mat-card>
+    </div>
+  </mat-step>
+
+
+  <!-- Step 3: Mention Roles and Set Permissions -->
+  <mat-step>
+    <div style="text-align: center; padding-top: 50px; font-family: Arial, sans-serif;">
+      <h1>Mention the Roles Present in Your Company</h1>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+        <div style="width: 100%; margin-bottom: 20px;">
+          <mat-form-field style="width: 80%; height: 100px; min-width: 600px;">
+            <mat-label style="font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 20px;"><b>Set Roles List for your organization</b></mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter Roles">
+              <mat-chip-row *ngFor="let role of roles" (removed)="removeRole(role)" [editable]="true" (edited)="edit(role, $event)">
+                {{role}}
+                <button matChipRemove [attr.aria-label]="'remove' + role">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+              <input placeholder="New Role..." [matChipInputFor]="chipGrid" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addRole($event)" />
+            </mat-chip-grid>
+          </mat-form-field>
         </div>
-      <div class="mat-elevation-z8">
-        
-        <table mat-table [dataSource]="dataSource" class="employee-table">
-  
-            <!-- ID Column -->
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> ID </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Name </th>
-              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-  
-            <!-- Email Column -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef> Email </th>
-              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
-  
-            <!-- Role Column -->
-            <ng-container matColumnDef="role">
-              <th mat-header-cell *matHeaderCellDef> Role </th>
-              <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="delete">
-              <th mat-header-cell *matHeaderCellDef> Delete </th>
-              <td mat-cell *matCellDef="let element; let i = index">
-                <button mat-button color="warn" (click)="deleteEmployee(i)">Delete</button>
-              </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="['id', 'name', 'email', 'role', 'delete']"></tr>
-            <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'email', 'role', 'delete'];"></tr>
-          </table>
-        </div>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-raised-button color="primary" (click)="stepper.reset()">(Finish) Reset</button>
+        <div style="display: flex; flex-direction: row; width: 80%; margin-top: 20px; min-width: 600px;">
+          <div style="display: flex; flex-direction: row; width: 60%; height: 80px; margin-top: 50px;">
+            <p style="font-family: 'Courier New', Courier, monospace; font-size: 20px; margin-top: 16px; margin-right: 6px;">Select a role here</p>
+            <mat-form-field>
+              <mat-label style="font-family: 'Arial Narrow', sans-serif;">Select Role</mat-label>
+              <mat-select [(value)]="selectedRole" (selectionChange)="updatePermissionsForRole(selectedRole)">
+                <mat-option *ngFor="let role of roles" [value]="role">
+                  {{role}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p style="font-family: 'Courier New', Courier, monospace; font-size: 20px; margin-top: 16px; margin-left: 6px;">And set its custom Permissions</p>
+          </div>
+          <div style="margin-top: 10px; width: 40%;">
+            <button mat-raised-button color="primary" (click)="updatePermissions()">Confirm</button>
+            <mat-accordion [ngClass]="{'disabled-accordion': !selectedRole}">
+              <mat-expansion-panel *ngFor="let submodule of selectedSubModules">
+                <mat-expansion-panel-header>{{submodule}}</mat-expansion-panel-header>
+                <div *ngIf="selectedRolePermissions[submodule]">
+                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].create">Create</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].read">Read</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].update">Update</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="selectedRolePermissions[submodule].delete">Delete</mat-checkbox>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
         </div>
       </div>
-      </mat-step>
-  </mat-stepper>
+    </div>
+  </mat-step>
+  
+  
+  
+
+  <!-- Step 4: Final Step -->
+  <mat-step>
+    <div style="padding: 20px;">
+      <p>Step 4 Content</p>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<!-- Navigation Buttons -->
+<div style="z-index: 10; position: fixed; bottom: 0; left: 0; padding: 20px;">
+  <button mat-raised-button *ngIf="stepper.selectedIndex !== 0" (click)="stepper.previous()">Previous</button>
+</div>
+<div style="z-index: 10; position: fixed; bottom: 0; right: 0; padding: 20px;">
+  <button mat-raised-button *ngIf="stepper.selectedIndex !== 0" (click)="stepper.next()">Next</button>
+  <button mat-raised-button *ngIf="stepper.selectedIndex === stepper.steps.length - 1"
+    (click)="stepper.reset()">Finish</button>
+</div>

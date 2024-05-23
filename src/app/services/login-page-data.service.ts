@@ -7,12 +7,15 @@ import { MasterDataService } from './master-data.service';
 })
 export class LoginPageDataService {
 
-  constructor(private _masterdata: MasterDataService,) { }
+  
   
   modules: ERPModule[] = this._masterdata.modules;
   userData: any;
   mode: string = 'dashboard'
-
+  is_login: boolean=false;
+  constructor(private _masterdata: MasterDataService,) { 
+    this.is_login=true;
+  }
   initializeUserData() {
     this.userData = {
       "userId": "user123",

@@ -17,12 +17,10 @@ export class LandingPageDataService {
   
   setOrganizationDetails(details: OrganizationSignupDetails) {
     this.organizationDetails = details;
-    console.log("Org DETAILS in data service: ", this.organizationDetails);
   }
 
   setModules(modules: ERPModule[]) {
     this.modules = modules;
-    console.log('modules set to Landing page data service is:', this.modules)
   }
   setSelectedModule(name: string) {
     this.SelectedModule = name;

@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { ShowSelectedCardsComponent } from './shared/show-selected-cards/show-selected-cards.component';
 import { LoginComponent } from './shared/login/login.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { CustomerRelationshipManagementConfigComponent } from './configure-page components/customer-relationship-management-config/customer-relationship-management-config.component';
 
 export const routes: Routes = [
     {path:'configure',component:ConfigurePageComponent},
@@ -15,7 +16,7 @@ export const routes: Routes = [
     {path:'', component:LandingPageComponent},
     {path:'landing', component:LandingPageComponent},
     {path:'welcome', component:WelcomePageComponent},
-    {path:'try', component:ShowSelectedCardsComponent}
+    {path:'try', component:CustomerRelationshipManagementConfigComponent}
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
