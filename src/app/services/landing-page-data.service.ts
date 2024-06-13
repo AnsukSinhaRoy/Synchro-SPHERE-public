@@ -25,7 +25,6 @@ export class LandingPageDataService {
   setSelectedModule(name: string) {
     this.SelectedModule = name;
   }
-
   //-------------------------------------------get methods----------------------------------------------------------------------
   getOrganizationName() {
     return this.organizationDetails ? this.organizationDetails.organizationName : '';
