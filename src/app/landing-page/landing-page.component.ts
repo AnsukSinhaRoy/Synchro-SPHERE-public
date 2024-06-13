@@ -68,7 +68,6 @@ export class LandingPageComponent {
     } 
     else 
     {
-      //this.router.navigate(['/welcome']);
       this._LandingPagedataservice.setModules(this.modules);
       const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
         width:'900px',
