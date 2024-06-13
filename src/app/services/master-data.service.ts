@@ -22,6 +22,7 @@ export class MasterDataService {
       .subscribe(
         (data: ERPModule[]) => {
           this.modules = data;
+          console.log("came from Database:")
           console.log(this.modules)
         },
         (error: any) => {
