@@ -17,8 +17,11 @@ export class MasterDataService {
     const headers = new HttpHeaders({
       "ngrok-skip-browser-warning": "69420"
     });
-
-    this.http.get<ERPModule[]>('https://blessed-ostrich-sadly.ngrok-free.app/modules', { headers })
+  
+    // Generate a unique timestamp for each request
+    const timestamp = Date.now();
+  
+    this.http.get<ERPModule[]>(`https://blessed-ostrich-sadly.ngrok-free.app/modules?timestamp=${timestamp}`, { headers })
       .subscribe(
         (data: ERPModule[]) => {
           this.modules = data;
