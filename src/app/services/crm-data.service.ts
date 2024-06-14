@@ -1,40 +1,41 @@
 import { Injectable } from '@angular/core';
 import { RolePermission } from '../services/Interfaces/RolePermission.interface';
+import { MasterDataService } from './master-data.service';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrmDataService {
 
-  constructor() {
+  constructor(private masterDataService: MasterDataService) {
   }
 
   crmdata: any;
 
-  fetch_CRM_Configuration_Data() {
-    this.crmdata =
-    {
-      "submodules":
-        [
-          "Customer Registration",
-          "Vender Registration",
-          "Lead Management",
-          "Ticket Management",
-          "Vender Quotation Management",
-          "Customer Quotation Management",
-          "Report",
-          "Configuration",
-        ],
-      "selectedSubmodules":
-        [
-        ],
-      "roles":
-        [
-        ],
-      "rolesAndPermissions":
-        [
-        ]
-    };
+  fetch_CRM_Configuration_Data(): Observable<any> {
+    // Return the Observable from fetchsubmodules()
+    return this.masterDataService.fetchsubmodules('CRM').pipe(
+      map((data: any) => {
+        // Transform the data into the desired format
+        return {
+          submodules: data.submodules,
+          selectedSubmodules: [],
+          roles: [],
+          rolesAndPermissions: []
+        };
+      }),
+      tap((crmdata: any) => {
+        // Set the crmdata property
+        this.crmdata = crmdata;
+        console.log("CRM configuration data fetched: ", this.crmdata);
+      }),
+      catchError((error: any) => {
+        console.error('Error fetching CRM configuration data:', error);
+        // Handle the error (e.g., by returning an empty object)
+        return of({});
+      })
+    );
   }
   fetch_preconfigured_CRM_Configuration_Data() {
     this.crmdata =

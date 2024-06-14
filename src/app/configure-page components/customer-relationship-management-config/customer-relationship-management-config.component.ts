@@ -42,15 +42,15 @@ export class CustomerRelationshipManagementConfigComponent {
   selectedRole!: string;
 
   constructor(private _crmdataservice: CrmDataService, private _loginpagedataservice: LoginPageDataService) {
-
-    if(_loginpagedataservice.is_login)this._crmdataservice.fetch_preconfigured_CRM_Configuration_Data();
-    else {this._crmdataservice.fetch_CRM_Configuration_Data();}
-    this.submodules = this._crmdataservice.getSubmodules();
-    this.selectedSubModules = this._crmdataservice.getSelectedSubmodules();
-    this.roles = this._crmdataservice.getRoleNames();
-    this.permissions = this._crmdataservice.getRolesAndPermissions();
-
+    this._crmdataservice.fetch_CRM_Configuration_Data().subscribe((crmdata: any) => {
+      this.submodules = this._crmdataservice.getSubmodules();
+      console.log("submodules at CRMConfig")
+      this.selectedSubModules = this._crmdataservice.getSelectedSubmodules();
+      this.roles = this._crmdataservice.getRoleNames();
+      this.permissions = this._crmdataservice.getRolesAndPermissions();
+    });
   }
+
   updatePermissionsForRole(role: string) {
     const rolePermissions = this.permissions.find(permission => permission.name === role);
     this.selectedRolePermissions = {};

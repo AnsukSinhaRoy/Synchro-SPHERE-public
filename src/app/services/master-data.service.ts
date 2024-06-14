@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ERPModule } from './Interfaces/erpmodule.interface';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,13 @@ export class MasterDataService {
 
   constructor(@Inject(HttpClient) private http: HttpClient) {
     this.fetchModules();
-    
   }
 
-  fetchModules(){
+  fetchModules() {
     const headers = new HttpHeaders({
       "ngrok-skip-browser-warning": "69420"
     });
-  
-    // Generate a unique timestamp for each request
-    const timestamp = Date.now();
-  
-    this.http.get<ERPModule[]>(`https://blessed-ostrich-sadly.ngrok-free.app/modules?timestamp=${timestamp}`, { headers })
+    this.http.get<ERPModule[]>(`https://blessed-ostrich-sadly.ngrok-free.app/modules`, { headers })
       .subscribe(
         (data: ERPModule[]) => {
           this.modules = data;
@@ -33,4 +29,16 @@ export class MasterDataService {
         }
       );
   }
+
+  fetchsubmodules(moduleName: string): Observable<any> {
+    const headers = new HttpHeaders({
+      "ngrok-skip-browser-warning": "69420"
+    });
+
+    // Add module_name as a query parameter
+    const params = new HttpParams().set('module_name', moduleName);
+
+    return this.http.get<any>(`https://blessed-ostrich-sadly.ngrok-free.app/crmdata`, { headers, params });
+  }
+
 }
