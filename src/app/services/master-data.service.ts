@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class MasterDataService {
   private baseUrl = 'https://blessed-ostrich-sadly.ngrok-free.app';
+  //private baseUrl = 'http://';
+
   private headers = new HttpHeaders({ 'ngrok-skip-browser-warning': '69420' });
   modules: ERPModule[] = [];
 
