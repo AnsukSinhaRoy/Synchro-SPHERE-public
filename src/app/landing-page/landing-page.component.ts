@@ -13,6 +13,7 @@ import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-o
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../shared/login/login.component';
 import { LoginPageDataService } from '../services/login-page-data.service';
+import { MasterDataService } from '../services/master-data.service';
 
 
 @Component({
@@ -23,11 +24,16 @@ import { LoginPageDataService } from '../services/login-page-data.service';
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
+  modules: ERPModule[] = [];
   organizationName: string = '';
-  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router, private _loginpageDataService: LoginPageDataService) {
-    // ...
+  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router, private masterDataService: MasterDataService,) {
+    this.getModulesFromAPI();
   }
-  modules: ERPModule[] = this._LandingPagedataservice.getModules();
+
+  getModulesFromAPI() {
+    this.masterDataService.fetchModules();
+    this.modules = this.masterDataService.modules;
+  }
 
   allComplete: boolean = false;
 
