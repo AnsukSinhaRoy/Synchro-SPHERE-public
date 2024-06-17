@@ -41,9 +41,10 @@ export class CustomerRelationshipManagementConfigComponent {
 
   selectedRole!: string;
 
-  constructor(private _crmdataservice: CrmDataService) {
+  constructor(private _crmdataservice: CrmDataService, private _loginpagedataservice: LoginPageDataService) {
     this._crmdataservice.fetch_CRM_Configuration_Data().subscribe((crmdata: any) => {
       this.submodules = this._crmdataservice.getSubmodules();
+      console.log("submodules at CRMConfig")
       this.selectedSubModules = this._crmdataservice.getSelectedSubmodules();
       this.roles = this._crmdataservice.getRoleNames();
       this.permissions = this._crmdataservice.getRolesAndPermissions();

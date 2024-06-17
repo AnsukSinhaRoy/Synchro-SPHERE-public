@@ -13,7 +13,6 @@ import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-o
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../shared/login/login.component';
 import { LoginPageDataService } from '../services/login-page-data.service';
-import { MasterDataService } from '../services/master-data.service';
 
 
 @Component({
@@ -24,16 +23,11 @@ import { MasterDataService } from '../services/master-data.service';
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
-  modules: ERPModule[] = [];
   organizationName: string = '';
-  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router, private masterDataService: MasterDataService,) {
-    this.getModulesFromAPI();
+  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router, private _loginpageDataService: LoginPageDataService) {
+    // ...
   }
-
-  getModulesFromAPI() {
-    this.masterDataService.fetchModules();
-    this.modules = this.masterDataService.modules;
-  }
+  modules: ERPModule[] = this._LandingPagedataservice.getModules();
 
   allComplete: boolean = false;
 
@@ -81,9 +75,9 @@ export class LandingPageComponent {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          
-          this.router.navigate(['/thanks']);
-
+          this._loginpageDataService.mode='configure';
+          this._LandingPagedataservice.setOrganizationDetails(result);
+          this.router.navigate(['/welcome']);
         }
       });
     }
