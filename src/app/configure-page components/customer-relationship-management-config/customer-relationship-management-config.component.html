@@ -43,12 +43,15 @@
 
   <!-- Step 3: Mention Roles and Set Permissions -->
   <mat-step>
-    <div style="text-align: center; padding-top: 50px; font-family: Arial, sans-serif;">
-      <h1>Mention the Roles Present in Your Company and configure their access rights</h1>
+    <div style="text-align: center; padding-top: 50px; font-family: Arial, sans-serif; ">
+      <h1 >Mention the Roles Present in Your Company and configure their access rights</h1>
       <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;padding-top: 30px;">
         <div style="width: 100%; margin-bottom: 20px;">
-          <mat-form-field style="width: 80%; height: 100px; min-width: 600px;">
-            <mat-label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px;"><b>Set Roles List for your organization</b></mat-label>
+          <mat-form-field style="width: calc(100% - 280px); /* 100% width minus 80px margin on each side */
+          margin: 0 80px;
+          min-height: 100px;
+          min-width: 300px;">
+            <mat-label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 16px;"><b>Set Roles List for your organization</b></mat-label>
             <mat-chip-grid #chipGrid aria-label="Enter Roles">
               <mat-chip-row *ngFor="let role of roles" (removed)="removeRole(role)" [editable]="true" (edited)="edit(role, $event)">
                 {{role}}
@@ -60,8 +63,8 @@
             </mat-chip-grid>
           </mat-form-field>
         </div>
-        <div class="step-3-main-div" style="display: flex; flex-direction: row; width: 80%; margin-top: 20px; min-width: 600px;">
-          <div style="display: flex; flex-direction: row; width: 60%; height: 80px; margin-top: 50px;">
+        <div style="display: flex; flex-direction: column; width: calc(100% - 280px); margin-top: 20px; align-items: center">
+          <div style="display: flex; flex-direction: row; height: 80px; margin-top: 50px;">
             <p style="font-size: 20px; margin-top: 16px; margin-right: 6px;">Select a role here</p>
             <mat-form-field>
               <mat-label style="font-family: 'Arial Narrow', sans-serif;">Select Role</mat-label>
@@ -73,12 +76,15 @@
             </mat-form-field>
             <p style="font-size: 20px; margin-top: 16px; margin-left: 6px;">And set its custom Permissions</p>
           </div>
-          <mat-card style="margin-top: 10px; width: 50%;">
+          <mat-card style="margin-top: 10px;width: 100%; max-width: 800px;">
             <mat-card-content>
               <mat-accordion [ngClass]="{'disabled-accordion': !selectedRole}">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
-                <button mat-raised-button color="primary" (click)="updatePermissions()" style="width: 120px;">Confirm</button>
-              </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                  <mat-slide-toggle [disabled]="!selectedRole" style="align-self: center;">
+                    Configurable Rights
+                  </mat-slide-toggle>
+                  <button mat-raised-button color="primary" (click)="updatePermissions()" style="width: 120px;">Confirm</button>
+                </div>
                 <mat-expansion-panel *ngFor="let submodule of selectedSubModules">
                   <mat-expansion-panel-header>
                     <div style="display: flex; align-items: center; width: 100%;">
@@ -128,10 +134,10 @@
 
 <!-- Navigation Buttons -->
 <div style="z-index: 10; position: fixed; bottom: 0; left: 0; padding: 20px;">
-  <button mat-raised-button style="height: 80vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex !== 0" (click)="stepper.previous()">Previous</button>
+  <button mat-raised-button style="height: 70vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex !== 0" (click)="stepper.previous()">Previous</button>
 </div>
 <div style="z-index: 10; position: fixed; bottom: 0; right: 0; padding: 20px;">
-  <button mat-raised-button style="height: 80vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex !== 0 && stepper.selectedIndex !== stepper._steps.length - 1" (click)="stepper.next()">Next</button>
-  <button mat-raised-button style="height: 80vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex === stepper.steps.length - 1"
+  <button mat-raised-button style="height: 70vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex !== 0 && stepper.selectedIndex !== stepper._steps.length - 1" (click)="stepper.next()">Next</button>
+  <button mat-raised-button style="height: 70vh; width: 110px; font-size: 1.2em; border-radius: 14px;background-color: #f8f8f8;" *ngIf="stepper.selectedIndex === stepper.steps.length - 1"
     (click)="stepper.reset()">Finish</button>
 </div>

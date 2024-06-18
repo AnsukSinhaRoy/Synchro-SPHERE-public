@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RolePermission } from '../../services/Interfaces/RolePermission.interface';
 import { MatCardModule } from '@angular/material/card';
 import { LoginPageDataService } from '../../services/login-page-data.service';
+import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-customer-relationship-management-config',
   standalone: true,
@@ -25,7 +26,8 @@ import { LoginPageDataService } from '../../services/login-page-data.service';
     FormsModule,
     MatFormFieldModule, MatChipsModule, MatIconModule,
     MatSelectModule, MatExpansionModule, MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatSlideToggleModule
   ],
   templateUrl: './customer-relationship-management-config.component.html',
   styleUrl: './customer-relationship-management-config.component.css'
