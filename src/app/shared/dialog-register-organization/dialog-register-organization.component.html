@@ -65,15 +65,15 @@
         </div>
     </mat-dialog-content>
     <div mat-dialog-actions>
-        <div style="display: flex; justify-content: space-between;
-    align-items: center; margin: 20px;">
-            <button mat-button (click)="dialogRef.close()" style="color:blanchedalmond">
-                Cancel
-            </button>
-
-            <button mat-button (click)="save()" [disabled]="!form.valid" style="color:blanchedalmond">
-                Register to SynchroSPHERE
-            </button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px;">
+          <button mat-button (click)="dialogRef.close()" style="color: blanchedalmond">
+            Cancel
+          </button>
+      
+          <button mat-button (click)="save()" [disabled]="!form.valid || isLoading" style="color: blanchedalmond">
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            <span *ngIf="!isLoading">Register to SynchroSPHERE</span>
+          </button>
         </div>
-    </div>
+      </div>
 </div>

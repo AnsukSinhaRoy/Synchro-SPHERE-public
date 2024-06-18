@@ -75,9 +75,8 @@ export class LandingPageComponent {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this._loginpageDataService.mode='configure';
-          this._LandingPagedataservice.setOrganizationDetails(result);
-          this.router.navigate(['/welcome']);
+          
+          this.router.navigate(['/thanks']);
         }
       });
     }

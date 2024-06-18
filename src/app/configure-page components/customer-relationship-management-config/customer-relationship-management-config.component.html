@@ -22,12 +22,12 @@
   <!-- Step 2: Select Submodules -->
   <mat-step>
     <div style="text-align: center; padding: 50px;margin-left: 30px;margin-right: 30px;">
-      <h1>Select CRM Modules</h1>
-      <p style="font-size: 1.2em;">Choose the modules you want to include in your CRM system.</p>
+      <h1>Select CRM Sub-modules</h1>
+      <p style="font-size: 1.2em;">Select the features you are interested in your CRM system.</p>
       <mat-card
         style="max-width: 800px; margin: 20px auto; padding: 20px; height: 500px; display: flex; flex-direction: column;">
         <h2>Available Modules</h2>
-        <p>Select from the following modules to customize your CRM experience:</p>
+        <p>Select from the following features to add into your CRM:</p>
         <mat-selection-list [(ngModel)]="selectedSubModules" multiple="true"
           style="flex-grow: 1; overflow: auto; text-align: left; border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
           <mat-list-option *ngFor="let submodule of submodules" [value]="submodule">
