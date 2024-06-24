@@ -15,6 +15,7 @@ import { CrmDashboardComponent } from '../Dashboard-page-components/crm-dashboar
 })
 
 export class ConfigurePageComponent {
+  
   modules: ERPModule[] = [];
   selectedIndex = 0;
   selectedModuleName: string;
