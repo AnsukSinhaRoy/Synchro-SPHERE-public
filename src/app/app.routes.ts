@@ -4,7 +4,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NgModule } from '@angular/core';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { ThanksComponent } from './thanks/thanks.component';
+import { ThanksComponent } from './shared/thanks/thanks.component';
 
 export const routes: Routes = [
     {path:'configure',component:ConfigurePageComponent},

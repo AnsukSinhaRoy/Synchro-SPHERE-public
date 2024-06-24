@@ -15,7 +15,7 @@ import { CrmDashboardComponent } from '../Dashboard-page-components/crm-dashboar
 })
 
 export class ConfigurePageComponent {
-  
+
   modules: ERPModule[] = [];
   selectedIndex = 0;
   selectedModuleName: string;
@@ -27,22 +27,6 @@ export class ConfigurePageComponent {
     this.selectedModuleName = this._landingdataService.getSelectedModule();
     if (this._logindataservice.modules.filter(module => module.available === true).length !== 0) {
       this.modules =this._logindataservice.modules.filter(module => module.clickable === true)
-      const selectedModuleIndex = this.modules.findIndex(module => module.name === this.selectedModuleName);
-      if (selectedModuleIndex !== -1) {
-        // If a module with the selectedModuleName exists, select it
-        this.selectedIndex = selectedModuleIndex;
-      } else {
-        // Otherwise, select the first checked module
-        const checkedModuleIndex = this.modules.findIndex(module => module.clickable);
-
-        if (checkedModuleIndex !== -1) {
-          this.selectedIndex = checkedModuleIndex;
-        }
-      }
-    }
-
-    else if (this._landingdataService.modules.filter(module => module.checked === true).length !== 0) {
-      this.modules = this._landingdataService.getModules();
       const selectedModuleIndex = this.modules.findIndex(module => module.name === this.selectedModuleName);
       if (selectedModuleIndex !== -1) {
         // If a module with the selectedModuleName exists, select it
