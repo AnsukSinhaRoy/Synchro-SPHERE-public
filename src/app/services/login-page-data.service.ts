@@ -28,12 +28,14 @@ export class LoginPageDataService {
           "Finance",
           "Supply Chain Management (SCM)",
           "Manufacturing and logistics",
+          "NEW MODULE"
         ],
       "module_access_to_user":
         [
           "Customer Relationship Management (CRM)",
           "Finance",
           "Manufacturing and logistics",
+          "NEW MODULE"
         ],
       "role":
       {

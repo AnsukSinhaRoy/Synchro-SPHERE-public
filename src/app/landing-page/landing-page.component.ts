@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
@@ -13,6 +13,8 @@ import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-o
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../shared/login/login.component';
 import { LoginPageDataService } from '../services/login-page-data.service';
+import { MasterDataService } from '../services/master-data.service';
+import { HttpParams } from '@angular/common/http';
 
 
 @Component({
@@ -22,14 +24,30 @@ import { LoginPageDataService } from '../services/login-page-data.service';
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css'
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
   organizationName: string = '';
-  constructor(private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router, private _loginpageDataService: LoginPageDataService) {
+  modules: ERPModule[] = [];
+  allComplete: boolean = false;
+
+  constructor(private apiService: MasterDataService, private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router) {
     // ...
   }
-  modules: ERPModule[] = this._LandingPagedataservice.getModules();
 
-  allComplete: boolean = false;
+  ngOnInit(): void {
+    this.apiService.makeApiCall<ERPModule[]>('/modules', new HttpParams().set('param', 'something'))
+    .subscribe(
+      (data: ERPModule[]) => {
+        console.log('Modules fetched:', data);
+        this.modules=data;
+        this.apiService.modules=this.modules;
+        
+      },
+      (error: any) => {
+        console.error('Error fetching modules:', error);
+        
+      }
+    );
+  }
 
   updateAllComplete() {
     this.allComplete = this.modules.every(module => module.checked);
