@@ -16,23 +16,6 @@ export class MasterDataService {
   }
 
 
-
-  fetchModules() {
-    const headers = this.headers;
-    const params = new HttpParams().set('param', 'something');
-    this.http.get<ERPModule[]>(`${this.baseUrl}/modules`, { headers, params })
-      .subscribe(
-        (data: ERPModule[]) => {
-          this.modules = data;
-          console.log("came from Database:");
-          console.log(this.modules);
-        },
-        (error: any) => {
-          console.error('Error fetching modules:', error);
-        }
-      );
-  }
-
   fetchsubmodules(moduleName: string): Observable<any> {
     const headers = this.headers;
     const params = new HttpParams().set('module_name', moduleName);
@@ -40,8 +23,15 @@ export class MasterDataService {
     return this.http.get<any>(`${this.baseUrl + path}`, { headers, params });
   }
 
-  public makeApiCall<T>(path: string, params?: HttpParams): Observable<T> {
+  public makegetApiCall<T>(path: string, params?: HttpParams): Observable<T> {
     const url = `${this.baseUrl}${path}`;
     return this.http.get<T>(url, { headers: this.headers, params });
   }
+
+  public makePostApiCall<T>(path: string, body: any, params?: HttpParams): Observable<T> {
+  const url = `${this.baseUrl}${path}`;
+  return this.http.post<T>(url, body, { headers: this.headers, params });
+}
+
+  
 }

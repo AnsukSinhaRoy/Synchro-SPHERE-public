@@ -34,7 +34,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.makeApiCall<ERPModule[]>('/modules', new HttpParams().set('param', 'something'))
+    this.apiService.makegetApiCall<ERPModule[]>('/modules', new HttpParams().set('param', 'something'))
     .subscribe(
       (data: ERPModule[]) => {
         console.log('Modules fetched:', data);

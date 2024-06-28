@@ -9,6 +9,8 @@ import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MasterDataService } from '../../services/master-data.service';
+import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-dialog-register-organization',
   standalone: true,
@@ -24,7 +26,8 @@ export class DialogRegisterOrganizationComponent {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogRegisterOrganizationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private http: HttpClient
+    private http: HttpClient,
+    private apiService: MasterDataService
   ) {}
 
   form = this.fb.group({
@@ -59,11 +62,27 @@ export class DialogRegisterOrganizationComponent {
         this.isLoading = true; // Start loading
         const formData = this.form.value;
     
-        // Simulate API call with 3-second delay
-        setTimeout(() => {
-          this.isLoading = false; // Stop loading after 3 seconds
-          this.dialogRef.close(formData); // Close dialog with form data
-        }, 3000);
+        const body = {
+          name: formData.name,
+          email: formData.email,
+          organizationName: formData.organizationName,
+          phoneNumber: formData.phoneNumber
+        };
+    
+        this.apiService.makePostApiCall('/registerOrganization', body).subscribe(
+          (response) => {
+            // Handle the successful response (e.g., show a success message)
+            console.log('Registration successful:', response);
+            this.isLoading = false; // Stop loading
+            this.dialogRef.close(formData); // Close dialog with form data
+          },
+          (error) => {
+            // Handle any errors (e.g., show an error message)
+            console.error('Error during registration:', error);
+            this.isLoading = false; // Stop loading
+          }
+        );
       }
     }
+    
 }

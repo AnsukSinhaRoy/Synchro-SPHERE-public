@@ -15,6 +15,7 @@ export class CrmDataService {
 
   fetch_CRM_Configuration_Data(): Observable<any> {
     // Return the Observable from fetchsubmodules()
+
     return this.masterDataService.fetchsubmodules('CRM').pipe(
       map((data: any) => {
         // Transform the data into the desired format
