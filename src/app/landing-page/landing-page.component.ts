@@ -37,10 +37,8 @@ export class LandingPageComponent implements OnInit {
     this.apiService.makegetApiCall<ERPModule[]>('/modules', new HttpParams().set('param', 'something'))
     .subscribe(
       (data: ERPModule[]) => {
-        console.log('Modules fetched:', data);
         this.modules=data;
         this.apiService.modules=this.modules;
-        
       },
       (error: any) => {
         console.error('Error fetching modules:', error);
@@ -94,7 +92,6 @@ export class LandingPageComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           
-          this.router.navigate(['/thanks']);
         }
       });
     }

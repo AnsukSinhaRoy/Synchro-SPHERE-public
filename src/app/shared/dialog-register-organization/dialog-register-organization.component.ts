@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MasterDataService } from '../../services/master-data.service';
 import { HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dialog-register-organization',
   standalone: true,
@@ -27,7 +28,8 @@ export class DialogRegisterOrganizationComponent {
     public dialogRef: MatDialogRef<DialogRegisterOrganizationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient,
-    private apiService: MasterDataService
+    private apiService: MasterDataService,
+    private router: Router
   ) {}
 
   form = this.fb.group({
@@ -75,6 +77,7 @@ export class DialogRegisterOrganizationComponent {
             console.log('Registration successful:', response);
             this.isLoading = false; // Stop loading
             this.dialogRef.close(formData); // Close dialog with form data
+            this.router.navigate(['/thanks']);
           },
           (error) => {
             // Handle any errors (e.g., show an error message)
