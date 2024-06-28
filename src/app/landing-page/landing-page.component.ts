@@ -14,6 +14,7 @@ import { LoginComponent } from '../shared/login/login.component';
 import { LoginPageDataService } from '../services/login-page-data.service';
 import { MasterDataService } from '../services/master-data.service';
 import { HttpParams } from '@angular/common/http';
+import { StateVariablesService } from '../services/state-variables.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class LandingPageComponent implements OnInit {
   modules: ERPModule[] = [];
   allComplete: boolean = false;
 
-  constructor(private _masterdata: MasterDataService, private dialog: MatDialog,private snackBar: MatSnackBar,  private router: Router) {
+  constructor(private _masterdata: MasterDataService, private dialog: MatDialog,private snackBar: MatSnackBar,  private router: Router, private _statemanagementservice: StateVariablesService) {
     // ...
   }
 
@@ -84,6 +85,7 @@ export class LandingPageComponent implements OnInit {
     } 
     else 
     {
+      this._statemanagementservice.selectedModules = this.modules.filter(module => module.checked).map(module => module.id);
       const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
         width:'900px',
         data: { name: '', email: '', organizationName: '', phoneNumber: '' }

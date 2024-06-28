@@ -12,6 +12,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MasterDataService } from '../../services/master-data.service';
 import { HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { StateVariablesService } from '../../services/state-variables.service';
 @Component({
   selector: 'app-dialog-register-organization',
   standalone: true,
@@ -29,7 +30,8 @@ export class DialogRegisterOrganizationComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient,
     private _masterdata: MasterDataService,
-    private router: Router
+    private router: Router,
+    private _statemanagementservice: StateVariablesService
   ) {}
 
   form = this.fb.group({
@@ -63,12 +65,13 @@ export class DialogRegisterOrganizationComponent {
       if (this.form.valid) {
         this.isLoading = true; // Start loading
         const formData = this.form.value;
-    
+        console.log(this._statemanagementservice.selectedModules)
         const body = {
           name: formData.name,
           email: formData.email,
           organizationName: formData.organizationName,
-          phoneNumber: formData.phoneNumber
+          phoneNumber: formData.phoneNumber,
+          module_access_to_org: this._statemanagementservice.selectedModules
         };
     
         this._masterdata.makePostApiCall('/registerOrganization', body).subscribe(
