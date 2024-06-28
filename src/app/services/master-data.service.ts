@@ -29,9 +29,7 @@ export class MasterDataService {
   }
 
   public makePostApiCall<T>(path: string, body: any, params?: HttpParams): Observable<T> {
-  const url = `${this.baseUrl}${path}`;
-  return this.http.post<T>(url, body, { headers: this.headers, params });
-}
-
-  
+    const url = `${this.baseUrl}${path}`;
+    return this.http.post<T>(url, body, { headers: this.headers, params });
+  }
 }

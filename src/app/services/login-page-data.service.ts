@@ -17,7 +17,7 @@ export class LoginPageDataService {
     
   }
   initializeUserData() {
-    this.is_login=true;
+    
     this.userData = {
       "userId": "user123",
       "organizationName": "Org name - login",
@@ -51,7 +51,7 @@ export class LoginPageDataService {
     const accessibleModules = this.userData.module_access_to_user;
     const accessibleModulestoOrg = this.userData.module_access_to_org;
     
-    this.modules = this.modules.map(module => {
+    this._masterdata.modules = this._masterdata.modules.map(module => {
       if (accessibleModules.includes(module.id)) {
         module.checked = true;
         module.available = true;
@@ -63,9 +63,12 @@ export class LoginPageDataService {
       }
       return module;
     }).filter(module => module.checked);
+    
     console.log('userdarta was innitialized ', this.getUserData())
     console.log('Module access to user', this.modules)
+    console.log('New Masterdata Module', this._masterdata.modules)
   }
+
   setMode(mode: string) {
     this.mode = mode;
     console.log(this.mode);

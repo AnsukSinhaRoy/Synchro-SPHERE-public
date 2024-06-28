@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ERPModule } from '../../services/Interfaces/erpmodule.interface';
-import { LandingPageDataService } from '../../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { NgClass, NgFor, NgStyle } from '@angular/common';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { LoginPageDataService } from '../../services/login-page-data.service';
+import { MasterDataService } from '../../services/master-data.service';
+import { StateVariablesService } from '../../services/state-variables.service';
 
 @Component({
   selector: 'app-show-selected-cards',
@@ -21,19 +22,12 @@ export class ShowSelectedCardsComponent {
   hover: boolean = false;
   hoveredModule: ERPModule | null = null;
 
-  constructor(private _LandingPagedataservice: LandingPageDataService, private _logindataservice: LoginPageDataService, private router: Router) {
-    this.organizationName = this._LandingPagedataservice.getOrganizationName();
-    this.modules = this._LandingPagedataservice.getModules().filter(module => module.checked);
+  constructor(private _statemanagementservice: StateVariablesService, private _logindataservice: LoginPageDataService, private router: Router, private _masterdata: MasterDataService) {
+
+    this.modules = this._masterdata.modules.filter(module => module.checked && module.available);
 
     if (this.modules.length === 0) {
-      if (!this._logindataservice.getUserData()) {
-        this.router.navigate(['']);
-      }
-      else { /*login workflow */
-        //this.modules = this._logindataservice.getAccessibleModulesToOrg().filter(module => module.checked);
-        this.modules = this._logindataservice.getModules().filter(module => module.checked && module.available);
-        console.log('modules in show selected cards - ', this.modules)
-      }
+      this.router.navigate(['']);
     }
   }
 
@@ -41,17 +35,15 @@ export class ShowSelectedCardsComponent {
     if (!module.clickable) {
       return;
     }
-    this._LandingPagedataservice.setSelectedModule(module.id);
+    this._statemanagementservice.SelectedModuleid=module.id;
     if (this._logindataservice.mode == 'dashboard') {
-      
       this.router.navigate(['/dashboard']);
     }
     else {
-      
       this.router.navigate(['/configure']);
     }
-
   }
+
   getBackgroundImage(module: ERPModule): string {
     return `${module.gradient}, url('assets/${module.backgroundImage}') no-repeat center/70%`;
   }

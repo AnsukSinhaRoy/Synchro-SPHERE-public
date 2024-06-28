@@ -28,7 +28,7 @@ export class DialogRegisterOrganizationComponent {
     public dialogRef: MatDialogRef<DialogRegisterOrganizationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient,
-    private apiService: MasterDataService,
+    private _masterdata: MasterDataService,
     private router: Router
   ) {}
 
@@ -71,7 +71,7 @@ export class DialogRegisterOrganizationComponent {
           phoneNumber: formData.phoneNumber
         };
     
-        this.apiService.makePostApiCall('/registerOrganization', body).subscribe(
+        this._masterdata.makePostApiCall('/registerOrganization', body).subscribe(
           (response) => {
             // Handle the successful response (e.g., show a success message)
             console.log('Registration successful:', response);

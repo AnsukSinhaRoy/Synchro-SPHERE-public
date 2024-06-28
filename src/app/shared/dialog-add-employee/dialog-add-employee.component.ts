@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RolesService } from '../../services/roles.service';
 export interface Roles {
   name: string;
 }
@@ -19,16 +18,12 @@ export interface Roles {
 })
 export class DialogAddEmployeeComponent {
   form: FormGroup;
-  roles: Roles[] = [{name: 'Salesman'}, {name: 'BPO'}, {name: 'Sales Manager'}];
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogAddEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private rolesService: RolesService 
   ) {
-
-    this.roles = this.rolesService.setRoles();
     this.form = this.fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],

@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ERPModule } from '../services/Interfaces/erpmodule.interface';
-import { LandingPageDataService } from '../services/landing-page-data.service';
 import { Router } from '@angular/router';
 import { DialogRegisterOrganizationComponent } from '../shared/dialog-register-organization/dialog-register-organization.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -29,16 +28,17 @@ export class LandingPageComponent implements OnInit {
   modules: ERPModule[] = [];
   allComplete: boolean = false;
 
-  constructor(private apiService: MasterDataService, private dialog: MatDialog,private snackBar: MatSnackBar, private _LandingPagedataservice: LandingPageDataService, private router: Router) {
+  constructor(private _masterdata: MasterDataService, private dialog: MatDialog,private snackBar: MatSnackBar,  private router: Router) {
     // ...
   }
 
   ngOnInit(): void {
-    this.apiService.makegetApiCall<ERPModule[]>('/modules', new HttpParams().set('param', 'something'))
+    this._masterdata.makegetApiCall<ERPModule[]>('/modules', new HttpParams().set('param', 'something'))
     .subscribe(
       (data: ERPModule[]) => {
         this.modules=data;
-        this.apiService.modules=this.modules;
+        this.modules.sort((a, b) => a.id - b.id);
+        this._masterdata.modules=this.modules;
       },
       (error: any) => {
         console.error('Error fetching modules:', error);
@@ -84,7 +84,6 @@ export class LandingPageComponent implements OnInit {
     } 
     else 
     {
-      this._LandingPagedataservice.setModules(this.modules);
       const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
         width:'900px',
         data: { name: '', email: '', organizationName: '', phoneNumber: '' }
