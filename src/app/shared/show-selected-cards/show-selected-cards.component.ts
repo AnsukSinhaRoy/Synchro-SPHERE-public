@@ -41,7 +41,7 @@ export class ShowSelectedCardsComponent {
     if (!module.clickable) {
       return;
     }
-    this._LandingPagedataservice.setSelectedModule(module.name);
+    this._LandingPagedataservice.setSelectedModule(module.id);
     if (this._logindataservice.mode == 'dashboard') {
       
       this.router.navigate(['/dashboard']);

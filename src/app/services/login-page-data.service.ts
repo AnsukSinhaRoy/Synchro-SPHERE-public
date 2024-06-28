@@ -23,19 +23,17 @@ export class LoginPageDataService {
       "organizationName": "Org name - login",
       "module_access_to_org":
         [
-          "Customer Relationship Management (CRM)",
-          "Human Resources (HR)",
-          "Finance",
-          "Supply Chain Management (SCM)",
-          "Manufacturing and logistics",
-          "NEW MODULE"
+          1,
+          2,
+          4,
+          5,
+          6,
+          9
         ],
       "module_access_to_user":
         [
-          "Customer Relationship Management (CRM)",
-          "Finance",
-          "Manufacturing and logistics",
-          "NEW MODULE"
+          1,
+          2,
         ],
       "role":
       {
@@ -54,11 +52,11 @@ export class LoginPageDataService {
     const accessibleModulestoOrg = this.userData.module_access_to_org;
     
     this.modules = this.modules.map(module => {
-      if (accessibleModules.includes(module.name)) {
+      if (accessibleModules.includes(module.id)) {
         module.checked = true;
         module.available = true;
         module.clickable = true;
-      } else if (accessibleModulestoOrg.includes(module.name)) {
+      } else if (accessibleModulestoOrg.includes(module.id)) {
         module.checked = true;
         module.available = true;
         module.clickable = false;

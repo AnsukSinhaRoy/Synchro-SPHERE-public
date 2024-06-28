@@ -11,7 +11,7 @@ export class LandingPageDataService {
   constructor(private _masterdata:MasterDataService) { }
   modules: ERPModule[] = this._masterdata.modules;
   private organizationDetails: any;
-  SelectedModule: string = '';
+  SelectedModuleid: number = 999;
 
   //-------------------------------------------set methods----------------------------------------------------------------------
   
@@ -22,8 +22,8 @@ export class LandingPageDataService {
   setModules(modules: ERPModule[]) {
     this.modules = modules;
   }
-  setSelectedModule(name: string) {
-    this.SelectedModule = name;
+  setSelectedModule(id: number) {
+    this.SelectedModuleid = id;
   }
   //-------------------------------------------get methods----------------------------------------------------------------------
   getOrganizationName() {
@@ -35,6 +35,6 @@ export class LandingPageDataService {
   }
 
   getSelectedModule() {
-    return this.SelectedModule;
+    return this.SelectedModuleid;
   }
 }

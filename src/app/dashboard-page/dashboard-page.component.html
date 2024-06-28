@@ -4,7 +4,7 @@
     @if (module.checked) {
     <mat-tab label="{{ module.name }}">
       <ng-template matTabContent>
-        @if (module.name === 'Customer Relationship Management (CRM)') {
+        @if (module.id === 1) {
         <app-crm-dashboard></app-crm-dashboard>
         } @else {
           <div style="text-align: center; margin-top: 50px;">

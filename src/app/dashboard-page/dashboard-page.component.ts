@@ -16,12 +16,12 @@ import { ERPModule } from '../services/Interfaces/erpmodule.interface';
 export class DashboardPageComponent {
   modulesInThisPage: ERPModule[] = [];
   selectedIndex = 0;
-  selectedModuleName: string;
+  selectedModuleid: number;
   constructor(private _landingdataService: LandingPageDataService, public _logindataservice: LoginPageDataService) {
     
-    this.selectedModuleName = this._landingdataService.getSelectedModule();
+    this.selectedModuleid = this._landingdataService.getSelectedModule();
     this.modulesInThisPage = this._logindataservice.getModules().filter(module => module.clickable)
-    const selectedModuleIndex = this.modulesInThisPage.findIndex(module => module.name === this.selectedModuleName);
+    const selectedModuleIndex = this.modulesInThisPage.findIndex(module => module.id === this.selectedModuleid);
     if (selectedModuleIndex !== -1) {
       this.selectedIndex = selectedModuleIndex;
     } else {
