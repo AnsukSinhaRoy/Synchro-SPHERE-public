@@ -88,6 +88,7 @@ export class LandingPageComponent implements OnInit {
       this._statemanagementservice.selectedModules = this.modules.filter(module => module.checked).map(module => module.id);
       const dialogRef = this.dialog.open(DialogRegisterOrganizationComponent, {
         width:'900px',
+        height: '576px',
         data: { name: '', email: '', organizationName: '', phoneNumber: '' }
       });
       dialogRef.afterClosed().subscribe(result => {
