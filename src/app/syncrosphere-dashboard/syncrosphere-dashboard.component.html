@@ -1,1 +1,13 @@
-<p>syncrosphere-dashboard works!</p>
+<mat-drawer-container class="drawer-container">
+    <mat-drawer class="drawer" [mode]="mode" [opened]="sideBarOpen" (openedChange)="onDrawerOpenedChange($event)">
+      <app-sidenav (functionSelected)="loadComponent($event)"></app-sidenav>
+    </mat-drawer>
+    
+    <mat-drawer-content class="drawer-content">
+      <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+      <div >
+        <div #dynamicComponentContainer class="dynamic-component"></div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  
