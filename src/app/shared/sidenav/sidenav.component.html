@@ -1,11 +1,10 @@
 <nav class="sidenav">
-    <ul>
-        <li *ngFor="let func of functions" (click)="selectFunction(func)">
-          <a>{{ func.name }}</a>
-        </li>
-      </ul>      
-    <div class="sidenav-footer">
-      Sidenav Footer
-    </div>
-  </nav>
-  
+  <ul>
+    <li *ngFor="let func of functions" [ngClass]="{'active': activeFunction === func}" (click)="selectFunction(func)">
+      <a>{{ func.name }}</a>
+    </li>
+  </ul>      
+  <div class="sidenav-footer">
+    Sidenav Footer
+  </div>
+</nav>
