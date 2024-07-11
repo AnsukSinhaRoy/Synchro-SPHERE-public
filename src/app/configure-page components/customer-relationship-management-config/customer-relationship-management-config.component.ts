@@ -167,4 +167,5 @@ export class CustomerRelationshipManagementConfigComponent {
       this.roles[index] = value;
     }
   }
+  
 }
