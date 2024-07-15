@@ -2,7 +2,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatButtonModule } from '@angular/material/button';
-import { Component, } from '@angular/core';
+import { Component, EventEmitter, Input, Output, } from '@angular/core';
 import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { CrmDataService } from '../../services/crm-data.service';
@@ -34,24 +34,19 @@ import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-to
 })
 export class CustomerRelationshipManagementConfigComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  roles: string[] = [];
-  submodules: string[] = [];
-  selectedSubModules: string[] = [];
-  addOnBlur = true;
-  permissions!: RolePermission[];
   selectedRolePermissions: any = {};
-
   selectedRole!: string;
 
-  constructor(private _crmdataservice: CrmDataService) {
-    this._crmdataservice.fetch_CRM_Configuration_Data().subscribe((crmdata: any) => {
-      this.submodules = this._crmdataservice.getSubmodules();
-      console.log("submodules at CRMConfig")
-      this.selectedSubModules = this._crmdataservice.getSelectedSubmodules();
-      this.roles = this._crmdataservice.getRoleNames();
-      this.permissions = this._crmdataservice.getRolesAndPermissions();
-    });
-  }
+  @Input() submodules: string[] = [];
+  @Input() selectedSubModules: string[] = [];
+  @Input() roles: string[] = [];
+  @Input() permissions!: RolePermission[];
+
+  @Output() updateSelectedSubmodulesEvent = new EventEmitter<string[]>();
+  @Output() updatePermissionsEvent = new EventEmitter<{ role: string, selectedRolePermissions: any }>();
+  addOnBlur = true;
+
+  constructor(private _crmdataservice: CrmDataService) {}
 
   updatePermissionsForRole(role: string) {
     const rolePermissions = this.permissions.find(permission => permission.name === role);
@@ -61,36 +56,14 @@ export class CustomerRelationshipManagementConfigComponent {
       this.selectedRolePermissions[submodule] = existingPermissions ? existingPermissions : { create: false, read: false, update: false, delete: false };
     }
   }
+
   updateSelectedSubmodules(selectedSubmodules: string[]) {
     this.selectedSubModules = selectedSubmodules;
-    this._crmdataservice.setSelectedSubmodules(selectedSubmodules);
+    this.updateSelectedSubmodulesEvent.emit(selectedSubmodules);
   }
+
   updatePermissions() {
-    // Find the RolePermission for the selected role
-    let rolePermission = this.permissions.find(permission => permission.name === this.selectedRole);
-  
-    // If it doesn't exist, create a new one and add it to permissions
-    if (!rolePermission) {
-      rolePermission = {name: this.selectedRole, permissions: []};
-      this.permissions.push(rolePermission);
-    }
-  
-    // Convert selectedRolePermissions to an array of permissions
-    const newPermissions = Object.entries(this.selectedRolePermissions).map(([submodule, actions]) => {
-      if (typeof actions === 'object' && actions !== null) {
-        return {submodule, ...actions};
-      } else {
-        // Handle the case where actions is not an object
-        console.error(`Actions for submodule ${submodule} is not an object`);
-        return null;
-      }
-    }).filter(permission => permission !== null);
-  
-    // Merge newPermissions into rolePermission
-    rolePermission.permissions = newPermissions as { submodule: string; create: boolean; read: boolean; update: boolean; delete: boolean; }[];
-  
-    // Update the roles and permissions in the service
-    this._crmdataservice.setRolesAndPermissions(this.permissions);
+    this.updatePermissionsEvent.emit({ role: this.selectedRole, selectedRolePermissions: this.selectedRolePermissions });
   }
   stepperChanged(event: any) {
     switch (event.selectedIndex) {
@@ -156,16 +129,5 @@ export class CustomerRelationshipManagementConfigComponent {
     this._crmdataservice.setRoles(this.roles);
   }
   // ...
-  edit(roles: string, event: MatChipEditedEvent) {
-    const value = event.value.trim();
-    if (!value) {
-      this.removeRole(roles);
-      return;
-    }
-    const index = this.roles.indexOf(roles);
-    if (index >= 0) {
-      this.roles[index] = value;
-    }
-  }
   
 }

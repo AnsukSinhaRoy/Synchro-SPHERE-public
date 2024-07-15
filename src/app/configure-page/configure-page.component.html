@@ -5,7 +5,14 @@
   <mat-tab label="{{ module.name }}">
     <ng-template matTabContent>
       @if (module.id === 1) {
-      <app-customer-relationship-management-config></app-customer-relationship-management-config>
+        <app-customer-relationship-management-config
+        [submodules]="permissionsData.module.submodules"
+        [selectedSubModules]="permissionsData.module.selectedSubmodules"
+        [roles]="permissionsData.roles"
+        [permissions]="permissionsData.rolesAndPermissions"
+        (updateSelectedSubmodulesEvent)="updateSelectedSubmodules($event)"
+        (updatePermissionsEvent)="updatePermissions($event.role, $event.selectedRolePermissions)"
+      ></app-customer-relationship-management-config>
       } @else {
         <div style="text-align: center; margin-top: 50px;">
           <h1 style="font-size: 2em; color: #ff6347;">

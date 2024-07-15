@@ -54,7 +54,7 @@
           min-width: 300px;">
             <mat-label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 16px;"><b>Set Roles List for your organization</b></mat-label>
             <mat-chip-grid #chipGrid aria-label="Enter Roles">
-              <mat-chip-row *ngFor="let role of roles" (removed)="removeRole(role)" [editable]="true" (edited)="edit(role, $event)">
+              <mat-chip-row *ngFor="let role of roles" (removed)="removeRole(role)" [editable]="true">
                 {{role}}
                 <button matChipRemove [attr.aria-label]="'remove' + role">
                   <mat-icon>cancel</mat-icon>
